@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/07/18 15:29:50 by rohidalg         ###   ########.fr       */
+/*   Created: 2023/10/16 18:45:00 by rohidalg          #+#    #+#             */
+/*   Updated: 2025/01/21 17:53:59 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "libft/libft.h"
-#include "pipex/pipex.h"
-# include <pthread.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	i;
 
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+}
 
-
-//------------------------parse.c------------------------//
-int header();
-
-#endif
+/*La función f se aplica a cada carácter en la cadena s a través de un bucle 
+while,permitiendo que la función f realice cambios en la cadena original 
+directamente.
+Esta función no crea una nueva cadena*/

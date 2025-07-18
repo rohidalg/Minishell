@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/07/18 15:29:50 by rohidalg         ###   ########.fr       */
+/*   Created: 2023/10/17 13:10:55 by rohidalg          #+#    #+#             */
+/*   Updated: 2024/06/17 17:22:55 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "libft/libft.h"
-#include "pipex/pipex.h"
-# include <pthread.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+t_list	*ft_lstnew(int nmb)
+{
+	t_list	*new;
 
-
-
-//------------------------parse.c------------------------//
-int header();
-
-#endif
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	new->nmb = nmb;
+	new->next = 0;
+	return (new);
+}

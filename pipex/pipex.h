@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/07/18 15:29:50 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/07/18 15:48:08 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
-# include "libft/libft.h"
-#include "pipex/pipex.h"
-# include <pthread.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include "../libft/libft.h"
+# include <fcntl.h>
+#include <sys/wait.h>
 
+//------------------------pipex.c------------------------//
 
+char	*ft_getenv(char *name, char **env);
+char	*ft_getpath(char *command, char **env);
+void	ft_son(char **argv, char **env, int *fd_p);
+void	ft_father(char **argv, char **env, int *fd_p);
 
-//------------------------parse.c------------------------//
-int header();
+//------------------------ft_utils.c------------------------//
+
+void	ft_exit(char *str);
+void	ft_check_argv(int argc, char **argv);
+int		ft_file(char *file, int option);
+void	ft_exec(char *command, char **env);
 
 #endif

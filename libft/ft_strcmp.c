@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/07/18 15:29:50 by rohidalg         ###   ########.fr       */
+/*   Created: 2025/02/20 15:36:59 by rohidalg          #+#    #+#             */
+/*   Updated: 2025/02/20 15:37:22 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "libft/libft.h"
-#include "pipex/pipex.h"
-# include <pthread.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	i;
 
-
-
-//------------------------parse.c------------------------//
-int header();
-
-#endif
+	i = 0;
+	if (!s1)
+		return (1);
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
