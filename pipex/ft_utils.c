@@ -20,8 +20,8 @@ void ft_exit(char *str)
 
 void ft_check_argv(int argc, char **argv)
 {
-    if (argc != 5)
-        ft_exit("more or less than 5 arguments\n");
+    if (argc >= 5)
+        ft_exit("it's necessary more or at least 5 arguments\n");
     if (!argv[3][0])
         exit(127);
 }

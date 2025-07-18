@@ -9,8 +9,7 @@ CFLAGS = -Wall -Wextra -Werror  #-fsanitize=address -g3
 
 INCLUDES = -I ../libft
 
-SRCs = pipex.c \
-	ft_utils.c
+SRCs = pipex.c	env_check.c	ft_utils.c \
 
 DIR_OBJs = OBJECTS
 
