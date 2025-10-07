@@ -1,0 +1,6 @@
+Un built-in es un programa que no existe, es creado por la shell.
+
+Ejemplo:
+
+ls es un programa que ya existe y está ubicado en /bin/ls, es posible llamarlo para ejecutarlo. Ya existe el programa.
+cd no existe, no hay una entrada que se llame /bin/cd, hay que crearlo. No existe, es un built-in.
