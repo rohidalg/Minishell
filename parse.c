@@ -1,28 +1,36 @@
+
 #include "minishell.h"
 
-void	ft_signal(int sig)
+// void	ft_signal(int sig)
+// {
+// 	g_signal = sig; // actualiza la global
+// }
+
+void	check_built_in(char *cmd)
 {
-	g_signal = sig; // actualiza la global
+	if (strcmp(cmd, "pwd") == 0)
+	{
+		built_pwd();
+	}
+	if (strcmp(cmd, "exit") == 0)
+		exit(EXIT_SUCCESS);
 }
 
 int	header(char **env)
 {
+	(void)env;
 	char *input; // puntero para guardar lo que se escribe
 	while (1)
 	{
 		input = readline("minishell> "); // muestra "minishell> " y espera input
+		check_built_in(input);
 		if (!input)
 			// si el usuario pulsa Ctrl+D (EOF),salimos
 			break ;
-		if (strcmp(input, "exit") == 0) // si el usuario escribe "exit", salimos
-		{
-			free(input);
-			break ;
-		}
-		if (*input) // si la línea no está vacía (no es solo Enter)
+		else if (*input) // si la línea no está vacía (no es solo Enter)
 		{
 			add_history(input); // guarda el comando en el historial
-			run_pipex(input, env);
+			// run_pipex(input, env);
 		}
 		free(input);
 	}

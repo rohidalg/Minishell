@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/07 16:20:46 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/07 18:31:09 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <unistd.h>
 # include <signal.h>
 
-volatile sig_atomic_t g_signal = 0;  // única global, tipo seguro
+// volatile sig_atomic_t g_signal = 0;  // única global, tipo seguro
 
 
 //------------------------parse.c------------------------//
@@ -39,5 +39,11 @@ void	ft_signal(int sig);
 char	*ft_quote(char *input);
 int		header(char **env);
 void	run_pipex(char *input, char **env);
+
+//------------------------BUILTS-IN------------------------//
+
+void	built_pwd(void);
+void	check_built_in(char *cmd);
+void    built_cd(char **cmd);
 
 #endif
