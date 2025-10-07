@@ -5,12 +5,12 @@ RM = rm -rf
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-MK_LIBFT = $(MAKE) -s -C libft > /dev/null 2>&1
-MK_PIPEX = $(MAKE) -s -C pipex > /dev/null 2>&1
+MK_LIBFT = $(MAKE) -s -C libft 
+MK_PIPEX = $(MAKE) -s -C pipex 
 
 INCLUDES = -I. -Ilibft/libft -Ipipex/pipex
 
-LIBS = -lreadline -Llibft -lft pipex/pipex.a
+LIBS = -lreadline pipex/pipex.a -Llibft -lft
 
 SRCs = parse.c
 
