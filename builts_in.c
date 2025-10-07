@@ -25,9 +25,23 @@ void	built_pwd(void)
 	free(cwd);
 }
 
-// int main(void)
+void	built_env(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		printf("%s\n", envp[i]);
+		i++;
+	}
+}
+
+// int main(int argc, char **argv, char **envp)
 // {
-//     built_pwd();
+// 	(void)argv;
+// 	(void)argc;
+//     built_env(envp);
 //     return (0);
 // }
 // Probando, hay que verificar todas las opciones, directorio anterior con .. y con -, directorio actual.

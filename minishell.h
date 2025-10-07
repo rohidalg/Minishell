@@ -33,17 +33,17 @@
 
 
 //------------------------parse.c------------------------//
-int		header(char **env);
 void	run_pipex(char *input, char **env);
 void	ft_signal(int sig);
 char	*ft_quote(char *input);
-int		header(char **env);
+int		header(char **env, char **envp);
 void	run_pipex(char *input, char **env);
 
 //------------------------BUILTS-IN------------------------//
 
 void	built_pwd(void);
-void	check_built_in(char *cmd);
+void	check_built_in(char *cmd, char **envp);
 void    built_cd(char **cmd);
+void	built_env(char **envp);
 
 #endif

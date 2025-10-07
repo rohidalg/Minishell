@@ -6,31 +6,35 @@
 // 	g_signal = sig; // actualiza la global
 // }
 
-void	check_built_in(char *cmd)
+void	check_built_in(char *cmd, char **envp)
 {
-	if (strcmp(cmd, "pwd") == 0)
+	if (getenv("PATH") == NULL)
 	{
-		built_pwd();
+		if (strcmp(cmd, "pwd") == 0)
+			built_pwd();
+		else if (strcmp(cmd, "cd") == 0)
+			built_cd(cmd[1]);
+		else if (strcmp(cmd, "exit") == 0)
+			exit(EXIT_SUCCESS);
+		else if (strcmp(cmd, "env") == 0)
+			built_env(envp);
 	}
-	if (strcmp(cmd, "exit") == 0)
-		exit(EXIT_SUCCESS);
 }
 
-int	header(char **env)
+int	header(char **envp, char **env)
 {
-	(void)env;
-	char *input; // puntero para guardar lo que se escribe
+	char	*input; // puntero para guardar lo que se escribe
 	while (1)
 	{
 		input = readline("minishell> "); // muestra "minishell> " y espera input
-		check_built_in(input);
+		check_built_in(input, envp);
 		if (!input)
 			// si el usuario pulsa Ctrl+D (EOF),salimos
 			break ;
 		else if (*input) // si la línea no está vacía (no es solo Enter)
 		{
 			add_history(input); // guarda el comando en el historial
-			// run_pipex(input, env);
+			run_pipex(input, env);
 		}
 		free(input);
 	}
@@ -61,13 +65,11 @@ void	run_pipex(char *input, char **env)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env, char **envp)
 {
 	(void)argc;
 	(void)argv;
-	header(env);
+	header(env, envp);
 	return (0);
 }
-
-
 // AVANZAR CON EL TEMA DE LAS COMILLAS
