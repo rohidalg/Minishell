@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:40:41 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/07 15:57:00 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/07 19:43:09 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	skip_quotes(const char *str, int *i, int *start)
 		len = *i - *start;
 		if (str[*i] == quote)
 			(*i)++;
+		else
+		{
+			fprintf(stderr, "Error: comilla %c sin cerrar\n", quote);
+			exit(EXIT_FAILURE);	
+		}
 		return (len);
 	}
 	return (-1);
@@ -64,7 +69,7 @@ char	*ft_words(const char *str, char c, int *i)
 	int		start;
 	int		len;
 	char	*word;
-
+	
 	while (str[*i] == c)
 		(*i)++;
 	if (!str[*i])

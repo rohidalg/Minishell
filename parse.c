@@ -30,7 +30,7 @@ int	header(char **env)
 		else if (*input) // si la línea no está vacía (no es solo Enter)
 		{
 			add_history(input); // guarda el comando en el historial
-			// run_pipex(input, env);
+			run_pipex(input, env);
 		}
 		free(input);
 	}
