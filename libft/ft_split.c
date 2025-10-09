@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:40:41 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/07 19:43:09 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/09 19:30:34 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	skip_quotes(const char *str, int *i, int *start)
 	if (str[*i] == '\'' || str[*i] == '"')
 	{
 		quote = str[*i];
+		// if (str[*i] == '"')
+		// 	expand_dolar(str);
 		(*i)++;
 		*start = *i;
 		while (str[*i] && str[*i] != quote)
@@ -30,7 +32,7 @@ int	skip_quotes(const char *str, int *i, int *start)
 		else
 		{
 			fprintf(stderr, "Error: comilla %c sin cerrar\n", quote);
-			exit(EXIT_FAILURE);	
+			exit(EXIT_FAILURE);
 		}
 		return (len);
 	}
@@ -69,7 +71,7 @@ char	*ft_words(const char *str, char c, int *i)
 	int		start;
 	int		len;
 	char	*word;
-	
+
 	while (str[*i] == c)
 		(*i)++;
 	if (!str[*i])
