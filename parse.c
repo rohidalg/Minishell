@@ -1,11 +1,6 @@
 
 #include "minishell.h"
 
-// void	ft_signal(int sig)
-// {
-// 	g_signal = sig; // actualiza la global
-// }
-
 void	check_built_in(char *cmd, char **g_env)
 {
 	if (getenv("PATH") == NULL)
