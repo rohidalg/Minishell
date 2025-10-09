@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/10/09 19:23:00 by rohidalg         ###   ########.fr       */
+=======
+/*   Updated: 2025/10/09 19:39:01 by wiljimen         ###   ########.fr       */
+>>>>>>> upstream/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +33,24 @@
 # include <unistd.h>
 # include <signal.h>
 
-// volatile sig_atomic_t g_signal = 0;
-
 extern char	**g_env;
 
+typedef struct	s_vars{
+	char	*name;
+	char	*value;
+	struct s_var *next;
+}	t_vars;
+
+//Name es el nombre de la variable, y Value el valor (Rodrigo=Bello)
 
 //------------------------parse.c------------------------//
+<<<<<<< HEAD
 void	ft_global(void);
 void	run_pipex(char *input, char **env);
+=======
+
+char	*ft_quote(char *input);
+>>>>>>> upstream/master
 int		header(char **env, char **g_env);
 void	run_pipex(char *input, char **env);
 
