@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:55:13 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/09 19:21:41 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/13 19:38:20 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_free(char **string);
-char				*expand_dolar(const char *str);
-int					skip_quotes(const char *str, int *i, int *start);
+int					skip_quotes(const char *str, int *i);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));

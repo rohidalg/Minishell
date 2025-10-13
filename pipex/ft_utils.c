@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/09 16:50:59 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:30:13 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,26 @@ int	ft_file(char *file, int option)
 void	ft_exec(char *command, char **env)
 {
 	char	**cmmd_part;
+	int		i;
+	char	*tmp;
 
 	cmmd_part = ft_split(command, ' ');
 	if (!cmmd_part)
 		return ;
-	if (execve(ft_getpath(cmmd_part[0], env), cmmd_part, env) == -1)
+	i = 0;
+	while (cmmd_part[i])
 	{
-		ft_putstr_fd("command not found: ", 2);
-		ft_putendl_fd(cmmd_part[0], 2);
-		ft_free(cmmd_part);
-		exit(127);
+		tmp = expand_dolar(cmmd_part[i], env);
+		if (tmp)
+		{
+			free(cmmd_part[i]);
+			cmmd_part[i] = tmp;
+		}
+		i++;
 	}
+	execve(ft_getpath(cmmd_part[0], env), cmmd_part, env);
+	ft_putstr_fd("command not found: ", 2);
+	ft_putendl_fd(cmmd_part[0], 2);
+	ft_free(cmmd_part);
+	exit(127);
 }

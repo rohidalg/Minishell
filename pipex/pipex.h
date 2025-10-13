@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/09/23 19:47:36 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/13 17:44:18 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	ft_check_argv(int argc, char **argv);
 char	*ft_check_path(char **path, char *cmd);
 int		ft_file(char *file, int option);
 void	ft_exec(char *command, char **env);
+
+//------------------------env_check.c------------------------//
+char	*expand_dolar(const char *str, char **env);
+
 
 #endif
