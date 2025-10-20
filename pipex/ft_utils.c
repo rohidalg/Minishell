@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/13 18:30:13 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:46:29 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_exec(char *command, char **env)
 	i = 0;
 	while (cmmd_part[i])
 	{
-		tmp = expand_dolar(cmmd_part[i], env);
+		tmp = ft_quotes(cmmd_part[i], env);
 		if (tmp)
 		{
 			free(cmmd_part[i]);

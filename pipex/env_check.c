@@ -1,113 +1,78 @@
 #include "pipex.h"
 
-
-char	*expand_dolar(const char *str, char **env)
+char	*expand_in_quotes(const char *str, char **env)
 {
 	int		i;
 	int		start;
-	
+	int		v;
+	char	*var;
+
 	i = 0;
-	if (!str)
-		return (0);
+	start = ++i;
+	while (str[i] && str[i] != '\'')
+	{
+		if (str[i] == '$')
+		{
+			v = ++i;
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+				i++;
+			var = ft_getenv(ft_substr(str, v, i - v), env);
+			return (ft_strjoin(ft_substr(str, start, v - start - 1), var));
+		}
+		i++;
+	}
+	return (ft_substr(str, start, i - start));
+}
+
+char	*ft_quotes(const char *str, char **env)
+{
+	int	i;
+	int	start;
+
+	i = 0;
 	if (str[i] == '"')
 	{
 		start = ++i;
 		while (str[i] && str[i] != '"')
-		i++;
+			i++;
 		return (ft_substr(str, start, i - start));
 	}
-	while(str[i])
-	{
-		if (str[i] == '$')
-		{
-			start = ++i;
-			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-			i++;
-			return (ft_getenv(ft_substr(str, start, i - start), env));
-		}
-		i++;
-	}
+	if (str[i] == '\'')
+		return (expand_in_quotes(str, env));
 	return (ft_strdup(str));
 }
 
-// 	ARREGLAR CUANDO USO LAS COMILLAS SIMPLES Y EL $ SOLO SE ENVIA EL DOLAR
-
-// int	skip_quotes(const char *str, int *i, int *start)
+// char	*expand_dolar(const char *str, char **env)
 // {
-// 	char	quote;
-// 	int		len;
-
-// 	if (str[*i] == '\'' || str[*i] == '"')
-// 	{
-// 		quote = str[*i];
-// 		(*i)++;
-// 		*start = *i;
-// 		while (str[*i] && str[*i] != quote)
-// 			(*i)++;
-// 		len = *i - *start;
-// 		if (str[*i] == quote)
-// 			(*i)++;
-// 		else
-// 		{
-// 			fprintf(stderr, "Error: comilla %c sin cerrar\n", quote);
-// 			exit(EXIT_FAILURE);
-// 		}
-// 		return (len);
-// 	}
-// 	return (-1);
-// }
-
-// char *ft_getenv(char *name, char **env)
-// {
-// 	int i;
-// 	int j;
-// 	char *sub;
+// 	int		i;
+// 	int		start;
+// 	char	*var;
+// 	int		v;
 
 // 	i = 0;
-// 	if (!*env)
-// 		exit(EXIT_FAILURE);
-// 	while (env[i])
+// 	if (str[i] == '"')
 // 	{
-// 		j = 0;
-// 		while (env[i][j] && env[i][j] != '=')
-// 			j++;
-// 		sub = ft_substr(env[i], 0, j);
-// 		if (ft_strcmp(sub, name) == 0)
-// 		{
-// 			free(sub);
-// 			return (env[i] + j + 1);
-// 		}
-// 		free(sub);
-// 		i++;
+// 		start = ++i;
+// 		while (str[i] && str[i] != '\'')
+// 			i++;
+// 		return (ft_substr(str, start, i - start - 1));
 // 	}
-// 	return (0);
-// }
-// // busca la variable del entorno que deseemmos y nos devuelve su valor
-
-// char *ft_getpath(char *command, char **env)
-// {
-// 	int i;
-// 	char **path;
-// 	char *tmp;
-// 	char *path_part;
-// 	char **cmmd;
-
-// 	i = -1;
-// 	path = ft_split(ft_getenv("PATH", env), ':');
-// 	cmmd = ft_split(command, ' ');
-// 	while (path[i++])
+// 	if (str[i] == '\'')
 // 	{
-// 		tmp = ft_strjoin(path[i], "/");			// "/usr/bin/"
-// 		path_part = ft_strjoin(tmp, cmmd[0]); // "/usr/bin/ls"
-// 		free(tmp);
-// 		if (access(path_part, F_OK | X_OK) == 0) // existe? | ejecutable?
+// 		start = ++i;
+// 		while (str[i] && str[i] != '\'')
 // 		{
-// 			ft_free(cmmd);
-// 			return (path_part);
+// 			if (str[i] == '$')
+// 			{
+// 				v = ++i;
+// 				while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+// 					i++;
+// 				var = ft_getenv(ft_substr(str, v, i - v), env);
+// 				return (ft_strjoin(ft_substr(str, start, v - start - 1), var));
+// 			}
+// 			i++;
 // 		}
-// 		free(path_part);
+// 		return (ft_substr(str, start, i - start));
 // 	}
-// 	ft_free(path);
-// 	ft_free(cmmd);
-// 	return (command);
+// 	return (ft_strdup(str));
 // }
