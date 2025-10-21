@@ -18,8 +18,8 @@ LIBS = -lreadline pipex/pipex.a -Llibft -lft
 
 SRCs =	parse.c	\
 		builts_in_2.c \
-# 		builts_in_1.c \
 		mini_utils.c \
+# 		builts_in_1.c \
 
 MAKEFLAG += --silent
 

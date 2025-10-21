@@ -18,7 +18,7 @@ void	check_built_in(char *cmd, char **g_env)
 
 int	header(char **env, char **g_env)
 {
-	char	*input; // puntero para guardar lo que se escribe
+	char *input; // puntero para guardar lo que se escribe
 	while (1)
 	{
 		input = readline("minishell> "); // muestra "minishell> " y espera input
@@ -28,6 +28,7 @@ int	header(char **env, char **g_env)
 			break ;
 		else if (*input) // si la línea no está vacía (no es solo Enter)
 		{
+			invalid_input(input);
 			add_history(input); // guarda el comando en el historial
 			run_pipex(input, env);
 		}
@@ -62,13 +63,12 @@ void	run_pipex(char *input, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
+	char	**g_env;
+
 	(void)argc;
 	(void)argv;
-	char **g_env;
-
 	g_env = NULL;
 	g_env = get_entire_env(env);
 	header(env, g_env);
 	return (0);
 }
-

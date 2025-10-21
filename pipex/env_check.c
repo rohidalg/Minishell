@@ -41,38 +41,3 @@ char	*ft_quotes(const char *str, char **env)
 		return (expand_in_quotes(str, env));
 	return (ft_strdup(str));
 }
-
-// char	*expand_dolar(const char *str, char **env)
-// {
-// 	int		i;
-// 	int		start;
-// 	char	*var;
-// 	int		v;
-
-// 	i = 0;
-// 	if (str[i] == '"')
-// 	{
-// 		start = ++i;
-// 		while (str[i] && str[i] != '\'')
-// 			i++;
-// 		return (ft_substr(str, start, i - start - 1));
-// 	}
-// 	if (str[i] == '\'')
-// 	{
-// 		start = ++i;
-// 		while (str[i] && str[i] != '\'')
-// 		{
-// 			if (str[i] == '$')
-// 			{
-// 				v = ++i;
-// 				while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-// 					i++;
-// 				var = ft_getenv(ft_substr(str, v, i - v), env);
-// 				return (ft_strjoin(ft_substr(str, start, v - start - 1), var));
-// 			}
-// 			i++;
-// 		}
-// 		return (ft_substr(str, start, i - start));
-// 	}
-// 	return (ft_strdup(str));
-// }
