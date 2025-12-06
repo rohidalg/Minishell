@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builts_in_2.c                                      :+:      :+:    :+:   */
+/*   builts_in_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will <will@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: will23 <will23@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 20:31:44 by will              #+#    #+#             */
-/*   Updated: 2025/11/25 20:34:02 by will             ###   ########.fr       */
+/*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
+/*   Updated: 2025/12/06 15:09:53 by will23           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void    built_cd(char **cmd)
 {
@@ -18,6 +18,24 @@ void    built_cd(char **cmd)
         chdir(getenv("HOME"));
     else if(cmd[1] != 0)
         perror("cd");
+}
+
+
+void	built_pwd(void)
+{
+	char *cwd;
+	
+	cwd = malloc(1024);
+	if (!cwd)
+	{
+		free(cwd);
+		exit(EXIT_FAILURE);
+	}
+    if (getcwd(cwd, 1024) != NULL)
+		printf("%sAA\n", cwd);
+	else
+		perror("pwd");
+	free(cwd);
 }
 
 char	**get_entire_env(char **env)
@@ -32,7 +50,7 @@ char	**get_entire_env(char **env)
 		exit(EXIT_FAILURE);
 	while(env[i])
 		i++;
-	new_env = ft_calloc(i, sizeof(char));
+	new_env = ft_calloc(i + 1, sizeof(char *));
 	i = 0;
 	while (env[i])
 	{
@@ -44,23 +62,6 @@ char	**get_entire_env(char **env)
 		i++;
 	}
 	return (new_env);
-}
-
-void	built_pwd(void)
-{
-	char *cwd;
-
-	cwd = malloc(1024);
-	if (!cwd)
-	{
-		free(cwd);
-		exit(EXIT_FAILURE);
-	}
-    if (getcwd(cwd, 1024) != NULL)
-		printf("%sAA\n", cwd);
-	else
-		perror("pwd");
-	free(cwd);
 }
 
 void	built_env(char **g_env)

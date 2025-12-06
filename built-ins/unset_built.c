@@ -16,24 +16,19 @@ int is_valid_var_name(char *name)
 {
 	int	i;
 
-	i = 0;
-	if (!name || !((name[0] >= 'A' && name[0] <= 'Z') ||
-				(name[0] > 'a' && name[0] <= 'z') ||
-				name[0] == '_'))
+	i = 1;
+	if (!name || (!ft_isalpha(name[0]) || name[0] != '_'))
 		return (0);
 	while (name[i])
 	{
-		if (!((name[i] >= 'A' && name[i] <= 'Z') ||
-			(name[i] >= 'a' && name[i] <= 'z') ||
-			(name[i] >= '0' && name[i] <= '9') ||
-			(name[i] == '_')))
+		if (!ft_isalnum(name[i]) || name[i] != '_')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-char	*var_same(char *var_name, char *name)
+int	var_same(char *var_name, char *name)
 {
 	int	i;
 
@@ -49,30 +44,83 @@ char	*var_same(char *var_name, char *name)
 	return (0);
 }
 
-void	built_unset(t_vars *head, char *var_delete)
+
+t_vars	*built_unset(t_vars *head, char *var_delete)
 {
 	t_vars	*previous;
 	t_vars	*current;
-
+	t_vars	*tmp;
+	
 	previous = NULL;
 	current = head;
-	while(current != NULL)
+	while (current != NULL)
 	{
 		if (var_same(current->name, var_delete))
 		{
 			if (previous == NULL)
-			{
-				previous = current;
-				current = current->next;
-			}
-			else
+				head = current->next;
+				else
 				previous->next = current->next;
-			free(previous->name);
-			free(previous->value);
-			return ;
+				tmp = current;
+				free(tmp->name);
+			free(tmp->value);
+			free(tmp);
+			break;
 		}
 		previous = current;
 		current = current->next;
 	}
-	return ;
+	return (head);
 }
+
+void	unset_var_from_array(char **array, char *var_delete)
+{
+	int	i;
+	int	j;
+	
+	if (!array || !var_delete)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		if (var_same(array[i], var_delete))
+		{
+			free(array[i]);
+			j = i;
+			while (array[j + 1])
+			{
+				array[j] = array[j + 1];
+				j++;
+			}
+			array[j] = NULL;
+			break ;
+		}
+		i++;
+	}
+}
+
+// args = ["unset", "HOME", "PATH", NULL]
+
+t_vars	*builtin_unset(char **args, t_vars *vars, char **env, char **g_env)
+{
+	int	i;
+
+	i = 1;
+	while (args[i])
+	{
+		if (!is_valid_var_name(args[i]))
+			printf("minishell: unset: `%s`: not a valid identifier\n", args[i]);
+		else
+		{
+			unset_var_from_array(env, args[i]);
+			unset_var_from_array(g_env, args[i]);
+			vars = built_unset(vars, args[i]);
+		}
+		i++;
+	}
+	return (vars);
+}
+
+// vars = built_unset(vars, "HOME");
+
+
