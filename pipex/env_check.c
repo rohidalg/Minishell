@@ -9,7 +9,7 @@ char	*expand_in_quotes(const char *str, char **env)
 
 	i = 0;
 	start = ++i;
-	while (str[i] && str[i] != '\'')
+	while (str[i] && str[i] != '"')
 	{
 		if (str[i] == '$')
 		{
@@ -30,14 +30,14 @@ char	*ft_quotes(const char *str, char **env)
 	int	start;
 
 	i = 0;
-	if (str[i] == '"')
+	if (str[i] == '\'')
 	{
 		start = ++i;
-		while (str[i] && str[i] != '"')
+		while (str[i] && str[i] != '\'')
 			i++;
 		return (ft_substr(str, start, i - start));
 	}
-	if (str[i] == '\'')
+	if (str[i] == '"')
 		return (expand_in_quotes(str, env));
 	return (ft_strdup(str));
 }

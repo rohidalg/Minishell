@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-void	check_built_in(char *cmd, char **g_env)
+void check_built_in(char *cmd, char **g_env)
 {
 	if (getenv("PATH") == NULL)
 	{
@@ -18,35 +18,39 @@ void	check_built_in(char *cmd, char **g_env)
 
 int	header(char **env, char **g_env)
 {
-	char *input; // puntero para guardar lo que se escribe
+	char *input;
+
 	while (1)
 	{
-		input = readline("minishell> "); // muestra "minishell> " y espera input
-		check_built_in(input, g_env);
-		if (!input)
-			// si el usuario pulsa Ctrl+D (EOF),salimos
+		input = readline("minishell> ");
+		if (!input)		// CTRL+D
 			break ;
-		else if (*input) // si la línea no está vacía (no es solo Enter)
+
+		if (*input)		// Si no está vacío
 		{
-			invalid_input(input);
-			add_history(input); // guarda el comando en el historial
-			run_pipex(input, env);
+			if (!invalid_input(input)) // Solo continúa si no hay caracteres prohibidos
+			{
+				check_built_in(input, g_env);
+				add_history(input);
+				run_pipex(input, env);
+			}
 		}
 		free(input);
 	}
 	return (0);
 }
 
-void	run_pipex(char *input, char **env)
+
+void run_pipex(char *input, char **env)
 {
-	pid_t	pid;
-	int		status;
+	pid_t pid;
+	int status;
 
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
-		return ;
+		return;
 	}
 	if (pid == 0)
 	{
@@ -61,9 +65,9 @@ void	run_pipex(char *input, char **env)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
-	char	**g_env;
+	char **g_env;
 
 	(void)argc;
 	(void)argv;

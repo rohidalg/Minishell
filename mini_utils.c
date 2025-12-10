@@ -6,15 +6,15 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/21 18:50:13 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/11/26 11:33:03 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	invalid_input(char *str)
+int invalid_input(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -22,7 +22,7 @@ int	invalid_input(char *str)
 		if (str[i] == '\\' || str[i] == ';')
 		{
 			fprintf(stderr, "Error: caracter no permitido '%c'\n", str[i]);
-			exit(EXIT_FAILURE);
+			return(1);
 		}
 		i++;
 	}
