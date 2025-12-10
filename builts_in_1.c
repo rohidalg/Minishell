@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   builts_in_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will23 <will23@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2025/12/06 15:09:53 by will23           ###   ########.fr       */
+/*   Updated: 2025/12/10 18:17:39 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void    built_cd(char **cmd)
+void	built_cd(char **cmd)
 {
-    if (cmd[1] == NULL)
-        chdir(getenv("HOME"));
-    else if(cmd[1] != 0)
-        perror("cd");
+	if (cmd[1] == NULL)
+		chdir(getenv("HOME"));
+	else if (cmd[1] != 0)
+		perror("cd");
 }
-
 
 void	built_pwd(void)
 {
-	char *cwd;
-	
+	char	*cwd;
+
 	cwd = malloc(1024);
 	if (!cwd)
 	{
 		free(cwd);
 		exit(EXIT_FAILURE);
 	}
-    if (getcwd(cwd, 1024) != NULL)
+	if (getcwd(cwd, 1024) != NULL)
 		printf("%sAA\n", cwd);
 	else
 		perror("pwd");
@@ -40,15 +39,15 @@ void	built_pwd(void)
 
 char	**get_entire_env(char **env)
 {
-	int i;
-	int j;
-	char *sub;
-	char **new_env;
+	int		i;
+	int		j;
+	char	*sub;
+	char	**new_env;
 
 	i = 0;
 	if (!*env)
 		exit(EXIT_FAILURE);
-	while(env[i])
+	while (env[i])
 		i++;
 	new_env = ft_calloc(i + 1, sizeof(char *));
 	i = 0;

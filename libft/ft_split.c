@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:40:41 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/13 19:37:51 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:26:15 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	skip_quotes(const char *str, int *i)
 	int		len;
 
 	quote = str[*i];
-	len = 1;          
+	len = 1;
 	(*i)++;
 	while (str[*i] && str[*i] != quote)
 	{
@@ -28,7 +28,7 @@ int	skip_quotes(const char *str, int *i)
 	if (str[*i] == quote)
 	{
 		(*i)++;
-		len++;       
+		len++;
 	}
 	else
 	{
@@ -37,7 +37,6 @@ int	skip_quotes(const char *str, int *i)
 	}
 	return (len);
 }
-
 
 int	ft_countwords(const char *str, char c)
 {
@@ -62,7 +61,6 @@ int	ft_countwords(const char *str, char c)
 	return (count);
 }
 
-
 char	*ft_words(const char *str, char c, int *i)
 {
 	int		start;
@@ -86,7 +84,6 @@ char	*ft_words(const char *str, char c, int *i)
 	ft_strlcpy(word, str + start, len + 1);
 	return (word);
 }
-
 
 char	**ft_free(char **string)
 {
@@ -127,7 +124,6 @@ char	**ft_split(char const *str, char c)
 	string[i_string] = NULL;
 	return (string);
 }
-
 
 /*cuenta palabras utilizando el delimitador c,
 y count se imcrementa cada vez que encuentra el primer caracter de la palabra*/

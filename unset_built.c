@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset_built.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 19:34:58 by wiljimen          #+#    #+#             */
-/*   Updated: 2025/10/09 19:52:42 by wiljimen         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:18:16 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_valid_var_name(char *name)
+int	is_valid_var_name(char *name)
 {
 	int	i;
 
@@ -44,13 +44,12 @@ int	var_same(char *var_name, char *name)
 	return (0);
 }
 
-
 t_vars	*built_unset(t_vars *head, char *var_delete)
 {
 	t_vars	*previous;
 	t_vars	*current;
 	t_vars	*tmp;
-	
+
 	previous = NULL;
 	current = head;
 	while (current != NULL)
@@ -59,13 +58,13 @@ t_vars	*built_unset(t_vars *head, char *var_delete)
 		{
 			if (previous == NULL)
 				head = current->next;
-				else
+			else
 				previous->next = current->next;
-				tmp = current;
-				free(tmp->name);
+			tmp = current;
+			free(tmp->name);
 			free(tmp->value);
 			free(tmp);
-			break;
+			break ;
 		}
 		previous = current;
 		current = current->next;
@@ -77,7 +76,7 @@ void	unset_var_from_array(char **array, char *var_delete)
 {
 	int	i;
 	int	j;
-	
+
 	if (!array || !var_delete)
 		return ;
 	i = 0;
@@ -122,5 +121,3 @@ t_vars	*builtin_unset(char **args, t_vars *vars, char **env, char **g_env)
 }
 
 // vars = built_unset(vars, "HOME");
-
-

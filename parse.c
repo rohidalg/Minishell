@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2025/12/10 16:57:08 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:38:32 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,35 @@ void	check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
 	if (strcmp(cmd[0], "pwd") == 0)
 		built_pwd();
 	else if (strcmp(cmd[0], "exit") == 0)
-	exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	else if (strcmp(cmd[0], "env") == 0)
-	built_env(g_env);
+		built_env(g_env);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		*vars = builtin_unset(cmd, *vars, env, g_env);
-	// else if (strcmp(cmd, "cd") == 0)
-	// 	built_cd(cmd[1]);
 }
+// else if (strcmp(cmd, "cd") == 0)
+// 	built_cd(cmd[1]);
 
 int	header(char **env, char **g_env, t_vars **vars)
 {
 	char	*input;
 	char	**cmd;
-	int		i;
 
 	while (1)
 	{
-		i = 0;
 		input = readline("minishell> ");
-		if (!input) // CTRL+D
+		if (!input)
 			break ;
-		if (*input) // Si no está vacío
+		if (*input)
 		{
 			if (!invalid_input(input))
-			// Solo continúa si no hay caracteres prohibidos
 			{
-				add_history(input);
 				cmd = ft_split(input, ' ');
 				if (cmd && cmd[0])
-					check_built_in(input, env, g_env, vars);
+					check_built_in(cmd, env, g_env, vars);
+				add_history(input);
 				run_pipex(input, env);
-				while (cmd && cmd[i])
-				{
-					free(cmd[i]);
-					i++;
-				}
-				free(cmd);
+				ft_free(cmd);
 			}
 		}
 		free(input);
@@ -76,15 +68,11 @@ void	run_pipex(char *input, char **env)
 	}
 	if (pid == 0)
 	{
-		// Proceso hijo: ejecuta el comando
-		ft_exec(input, env);
+		ft_exec(input, env); // Proceso hijo: ejecuta el comando
 		exit(127);
 	}
 	else
-	{
-		// Proceso padre: espera a que termine el hijo para volver a la minishell
-		waitpid(pid, &status, 0);
-	}
+		waitpid(pid, &status, 0); // Proceso padre: espera a que termine el hijo
 }
 
 int	main(int argc, char **argv, char **env)

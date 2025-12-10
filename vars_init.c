@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vars_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: will23 <will23@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 14:50:42 by will23            #+#    #+#             */
-/*   Updated: 2025/12/06 15:14:04 by will23           ###   ########.fr       */
+/*   Updated: 2025/12/10 18:22:16 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 // Devuelve una copia del nombre antes de '='
 // "PATH=/usr/bin" -> "PATH"
