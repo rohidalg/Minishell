@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/11/25 19:46:28 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:51:27 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef struct s_vars
 
 //------------------------parse.c------------------------//
 
-int					header(char **env, char **g_env);
+int					header(char **env, char **g_env, t_vars **vars);
 void				run_pipex(char *input, char **env);
 
 //------------------------BUILTS-IN------------------------//
 
 void				built_pwd(void);
-void				check_built_in(char *cmd, char **g_env);
+void				check_built_in(char **cmd, char **env, char **g_env, t_vars **vars);
 void				built_cd(char **cmd);
 void				built_env(char **g_env);
 char				**get_entire_env(char **env);
@@ -52,5 +52,18 @@ char				**get_entire_env(char **env);
 //------------------------mini_utils.c------------------------//
 
 int					invalid_input(char *str);
+int		is_valid_var_name(char *name);
+int		var_same(char *var_name, char *name);
+t_vars	*built_unset(t_vars *head, char *var_delete);
+void	unset_var_from_array(char **array, char *var_delete);
+t_vars	*builtin_unset(char **args, t_vars *vars, char **env, char **g_env);
+
+//-----------------------VARIABLES-----------------------------//
+
+char	*get_var_name(char *str);
+char	*get_var_value(char *str);
+t_vars	*new_var_node(char *env_line);
+void	vars_add_back(t_vars **head, t_vars *new);
+t_vars	*init_vars_from_env(char **g_env);
 
 #endif

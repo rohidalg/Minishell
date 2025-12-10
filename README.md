@@ -11,5 +11,8 @@ W & R== 07/10/2025 --> Encotramos que el PWD y el ECHO (que hizo Rodri con lo de
                         ya se ejecutan por estar en el PATH gracias al Pipex, pero hay que guardar el environment 
                         en un char por si lo borran, subir el LVLSHELL y además hay que verificar si los builts-in
                         existen (si no han borrado el env o el PATH), y ahí crearlos, eso puede ser fuera del PIPEX.
+
 W== 07/10/2025 part 2 --> Se creó el built de pwd, de cd y el de env, junto al de exit, falta comprobar como mejorar el 
                         funcionamiento por que en mi caso uso envp y hace falta env.
+
+W== 25/11/2025 --> El built-in de unset está casi listo, falta programar la actualización de ambos env, tanto g_env como env.

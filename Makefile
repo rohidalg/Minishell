@@ -17,9 +17,10 @@ INCLUDES = -I. -Ilibft/libft -Ipipex/pipex
 LIBS = -lreadline pipex/pipex.a -Llibft -lft
 
 SRCs =	parse.c	\
-		builts_in_2.c \
 		mini_utils.c \
-# 		builts_in_1.c \
+		builts-ins/builts_in_1.c \
+		builts-ins/unset_built.c \
+		builts-ins/vars_init.c \
 
 MAKEFLAG += --silent
 
