@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builts_in_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2025/12/10 18:17:39 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/20 17:21:58 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,26 @@ char	**get_entire_env(char **env)
 {
 	int		i;
 	int		j;
-	char	*sub;
 	char	**new_env;
 
-	i = 0;
-	if (!*env)
+	if (!env || !env[0])
 		exit(EXIT_FAILURE);
+	i = 0;
 	while (env[i])
 		i++;
 	new_env = ft_calloc(i + 1, sizeof(char *));
+	if (!new_env)
+		exit(EXIT_FAILURE);
 	i = 0;
 	while (env[i])
 	{
 		j = 0;
 		while (env[i][j])
 			j++;
-		sub = ft_substr(env[i], 0, j);
-		free(sub);
+		new_env[i] = ft_substr(env[i], 0, j);
 		i++;
 	}
+	new_env[i] = NULL;
 	return (new_env);
 }
 

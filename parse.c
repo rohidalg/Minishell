@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2025/12/10 18:38:32 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/20 17:19:01 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
+void	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
 	if (!cmd || cmd[0] == NULL)
 		return ;
@@ -21,14 +21,16 @@ void	check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
 	else if (strcmp(cmd[0], "exit") == 0)
 		exit(EXIT_SUCCESS);
 	else if (strcmp(cmd[0], "env") == 0)
-		built_env(g_env);
+		built_env(*g_env);
 	else if (ft_strcmp(cmd[0], "unset") == 0)
-		*vars = builtin_unset(cmd, *vars, env, g_env);
+		*vars = builtin_unset(cmd, *vars, *g_env);
+	else if (ft_strcmp(cmd[0], "export") == 0)
+    	*g_env = builtin_export(cmd, vars, *g_env);
 }
 // else if (strcmp(cmd, "cd") == 0)
 // 	built_cd(cmd[1]);
 
-int	header(char **env, char **g_env, t_vars **vars)
+int	header(char **g_env, t_vars **vars)
 {
 	char	*input;
 	char	**cmd;
@@ -44,9 +46,9 @@ int	header(char **env, char **g_env, t_vars **vars)
 			{
 				cmd = ft_split(input, ' ');
 				if (cmd && cmd[0])
-					check_built_in(cmd, env, g_env, vars);
+					check_built_in(cmd, &g_env, vars);
 				add_history(input);
-				run_pipex(input, env);
+				run_pipex(input, g_env);
 				ft_free(cmd);
 			}
 		}
@@ -55,7 +57,7 @@ int	header(char **env, char **g_env, t_vars **vars)
 	return (0);
 }
 
-void	run_pipex(char *input, char **env)
+void	run_pipex(char *input, char **g_env)
 {
 	pid_t	pid;
 	int		status;
@@ -68,7 +70,7 @@ void	run_pipex(char *input, char **env)
 	}
 	if (pid == 0)
 	{
-		ft_exec(input, env); // Proceso hijo: ejecuta el comando
+		ft_exec(input, g_env); // Proceso hijo: ejecuta el comando
 		exit(127);
 	}
 	else
@@ -85,6 +87,6 @@ int	main(int argc, char **argv, char **env)
 	g_env = NULL;
 	g_env = get_entire_env(env);
 	vars = init_vars_from_env(g_env);
-	header(env, g_env, &vars);
+	header(g_env, &vars);
 	return (0);
 }

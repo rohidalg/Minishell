@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vars_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 14:50:42 by will23            #+#    #+#             */
-/*   Updated: 2025/12/10 18:22:16 by rohidalg         ###   ########.fr       */
+/*   Updated: 2025/12/20 17:26:07 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,18 @@ t_vars	*new_var_node(char *env_line)
 {
 	t_vars	*node;
 
-	node = (t_vars *)malloc(sizeof(t_vars));
+	node = malloc(sizeof(t_vars));
 	if (!node)
 		return (NULL);
 	node->name = get_var_name(env_line);
 	node->value = get_var_value(env_line);
+	if (!node->name || !node->value)
+	{
+		free(node->name);
+		free(node->value);
+		free(node);
+		return (NULL);
+	}
 	node->next = NULL;
 	return (node);
 }
