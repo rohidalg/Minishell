@@ -6,18 +6,18 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:25:21 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/12/10 18:25:22 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:08:53 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*expand_in_quotes(const char *str, char **env)
+char *expand_in_quotes(const char *str, char **env)
 {
-	int		i;
-	int		start;
-	int		v;
-	char	*var;
+	int i;
+	int start;
+	int v;
+	char *var;
 
 	i = 0;
 	start = ++i;
@@ -36,10 +36,10 @@ char	*expand_in_quotes(const char *str, char **env)
 	return (ft_substr(str, start, i - start));
 }
 
-char	*ft_quotes(const char *str, char **env)
+char *ft_quotes(const char *str, char **env)
 {
-	int	i;
-	int	start;
+	int i;
+	int start;
 
 	i = 0;
 	if (str[i] == '\'')

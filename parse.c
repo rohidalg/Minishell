@@ -6,16 +6,16 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2025/12/10 18:38:32 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:09:12 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
+void check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
 {
 	if (!cmd || cmd[0] == NULL)
-		return ;
+		return;
 	if (strcmp(cmd[0], "pwd") == 0)
 		built_pwd();
 	else if (strcmp(cmd[0], "exit") == 0)
@@ -28,16 +28,16 @@ void	check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
 // else if (strcmp(cmd, "cd") == 0)
 // 	built_cd(cmd[1]);
 
-int	header(char **env, char **g_env, t_vars **vars)
+int header(char **env, char **g_env, t_vars **vars)
 {
-	char	*input;
-	char	**cmd;
+	char *input;
+	char **cmd;
 
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (!input)
-			break ;
+			break;
 		if (*input)
 		{
 			if (!invalid_input(input))
@@ -55,16 +55,16 @@ int	header(char **env, char **g_env, t_vars **vars)
 	return (0);
 }
 
-void	run_pipex(char *input, char **env)
+void run_pipex(char *input, char **env)
 {
-	pid_t	pid;
-	int		status;
+	pid_t pid;
+	int status;
 
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
-		return ;
+		return;
 	}
 	if (pid == 0)
 	{
@@ -75,10 +75,10 @@ void	run_pipex(char *input, char **env)
 		waitpid(pid, &status, 0); // Proceso padre: espera a que termine el hijo
 }
 
-int	main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
-	char	**g_env;
-	t_vars	*vars;
+	char **g_env;
+	t_vars *vars;
 
 	(void)argc;
 	(void)argv;

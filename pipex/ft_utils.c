@@ -6,19 +6,19 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/20 17:46:29 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:08:49 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_exit(char *str, int ex)
+void ft_exit(char *str, int ex)
 {
 	ft_putstr_fd(str, 2);
 	exit(ex);
 }
 
-void	ft_check_argv(int argc, char **argv)
+void ft_check_argv(int argc, char **argv)
 {
 	if (argc != 5)
 		ft_exit("more or less than 5 arguments\n", 0);
@@ -38,11 +38,11 @@ void	ft_check_argv(int argc, char **argv)
 		ft_exit("permission denied\n", 0);
 }
 
-char	*ft_check_path(char **path, char *cmd)
+char *ft_check_path(char **path, char *cmd)
 {
-	int		i;
-	char	*tmp;
-	char	*path_part;
+	int i;
+	char *tmp;
+	char *path_part;
 
 	i = 0;
 	while (path[i])
@@ -58,9 +58,9 @@ char	*ft_check_path(char **path, char *cmd)
 	return (NULL);
 }
 
-int	ft_file(char *file, int option)
+int ft_file(char *file, int option)
 {
-	int	tmp;
+	int tmp;
 
 	tmp = 0;
 	if (option == 0)
@@ -72,15 +72,15 @@ int	ft_file(char *file, int option)
 	return (tmp);
 }
 
-void	ft_exec(char *command, char **env)
+void ft_exec(char *command, char **env)
 {
-	char	**cmmd_part;
-	int		i;
-	char	*tmp;
+	char **cmmd_part;
+	int i;
+	char *tmp;
 
 	cmmd_part = ft_split(command, ' ');
 	if (!cmmd_part)
-		return ;
+		return;
 	i = 0;
 	while (cmmd_part[i])
 	{
@@ -92,6 +92,7 @@ void	ft_exec(char *command, char **env)
 		}
 		i++;
 	}
+	redirect(cmmd_part);
 	execve(ft_getpath(cmmd_part[0], env), cmmd_part, env);
 	ft_putstr_fd("command not found: ", 2);
 	ft_putendl_fd(cmmd_part[0], 2);
