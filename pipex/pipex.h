@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/07 20:09:00 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:33:54 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ char *ft_quotes(const char *str, char **env);
 
 int redirect_input(char *file);
 void redirect_output(char *file, int append);
-void redirect(char **cmmd_part);
+char **redirect(char **args);
 
 #endif

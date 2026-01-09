@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/07 20:08:49 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:29:57 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void ft_exec(char *command, char **env)
 		}
 		i++;
 	}
-	redirect(cmmd_part);
+	cmmd_part = redirect(cmmd_part);
 	execve(ft_getpath(cmmd_part[0], env), cmmd_part, env);
 	ft_putstr_fd("command not found: ", 2);
 	ft_putendl_fd(cmmd_part[0], 2);

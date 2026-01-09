@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:46:56 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/07 20:08:45 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/08 19:39:49 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,42 +55,37 @@ void redirect_output(char *file, int append)
     close(fd);
 }
 
-void redirect(char **cmmd_part)
+char **redirect(char **args)
 {
-    int i = 0;
-    while (cmmd_part[i])
-    {
-        if (strcmp(cmmd_part[i], "<") == 0 && cmmd_part[i + 1])
-        {
-            redirect_input(cmmd_part[i + 1]);
-            cmmd_part[i] = cmmd_part[i + 1] = NULL;
-        }
-        else if (strcmp(cmmd_part[i], ">") == 0 && cmmd_part[i + 1])
-        {
-            redirect_output(cmmd_part[i + 1], 0);
-            cmmd_part[i] = cmmd_part[i + 1] = NULL;
-        }
-        else if (strcmp(cmmd_part[i], ">>") == 0 && cmmd_part[i + 1])
-        {
-            redirect_output(cmmd_part[i + 1], 1);
-            cmmd_part[i] = cmmd_part[i + 1] = NULL;
-        }
-        i++;
-    }
-}
+    int i;
+    int j;
+    int append;
 
-// me falta poner free para que no se colapse cuando hago este ejemplo
-// (./minishell
-// minishell> echo "línea 1" >> test2.txt
-// minishell> echo "línea 2" >> test2.txt
-// minishell> cat test2.txt
-// línea 1
-// línea 2
-// minishell> cat < test2.txt
-// línea 1
-// línea 2
-// minishell> grep "línea 1" < test2.txt
-// línea 1
-// test2.txt
-// línea: No such file or directory
-// ^C)
+    i = 0;
+    while (args[i])
+    {
+        if (args[i][0] == '<' && !args[i][1] && args[i + 1])
+            redirect_input(args[i + 1]);
+        else if (args[i][0] == '>' && args[i + 1])
+        {
+            append = (args[i][1] == '>');
+            redirect_output(args[i + 1], append);
+        }
+        else
+        {
+            i++;
+            continue;
+        }
+        free(args[i]);
+        free(args[i + 1]);
+
+        j = i;
+        while (args[j + 2])
+        {
+            args[j] = args[j + 2];
+            j++;
+        }
+        args[j] = NULL;
+    }
+    return (args);
+}

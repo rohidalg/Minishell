@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/07 20:09:12 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/09 13:30:52 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,6 @@ int main(int argc, char **argv, char **env)
 	header(env, g_env, &vars);
 	return (0);
 }
+
+
+// implementar el pipe y que acepte los '\' entre comillas
