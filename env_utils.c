@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 08:18:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 16:40:29 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:47:51 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	env_replace(char *arg, char **g_env)
 	i = 0;
 	while (g_env[i])
 	{
-		if (ft_strncmp(g_env[i], arg, var_len) == 0
-			&& g_env[i][var_len] == '='
+		if (ft_strncmp(g_env[i], arg, var_len) == 0 && g_env[i][var_len] == '='
 			&& (arg[var_len] == '=' || arg[var_len] == '\0'))
 		{
 			free(g_env[i]);
@@ -38,13 +37,12 @@ int	env_replace(char *arg, char **g_env)
 	return (0);
 }
 
-
 char	**add_env_var(char *var, char **g_env)
 {
 	int		len;
 	int		i;
 	char	**new_env;
-	
+
 	len = 0;
 	i = 0;
 	while (g_env[len] != NULL)
@@ -60,7 +58,7 @@ char	**add_env_var(char *var, char **g_env)
 	new_env[len] = ft_strdup(var);
 	new_env[len + 1] = NULL;
 	ft_free(g_env);
-	return(new_env);
+	return (new_env);
 }
 
 char	**env_set(char *arg, char **g_env)
@@ -103,4 +101,3 @@ void	vars_mark_exported(char *name, t_vars **vars)
 		return ;
 	vars_add_new(name, vars);
 }
-

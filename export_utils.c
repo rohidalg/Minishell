@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:13:36 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 16:40:24 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:50:21 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	sort_names(char **vars_names)
 	char	*tmp;
 
 	i = 0;
-	while(vars_names[i])
+	while (vars_names[i])
 	{
 		j = i + 1;
-		while(vars_names[j])
+		while (vars_names[j])
 		{
-			if(ft_strcmp(vars_names[i], vars_names[j]) > 0)
+			if (ft_strcmp(vars_names[i], vars_names[j]) > 0)
 			{
 				tmp = vars_names[i];
 				vars_names[i] = vars_names[j];

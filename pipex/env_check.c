@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:25:21 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 17:31:45 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:45:08 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ char	*expand_in_quotes(const char *str, char **env)
 	return (ft_substr(str, start, i - start));
 }
 
-char *ft_quotes(const char *str, char **env)
+char	*ft_quotes(const char *str, char **env)
 {
-	int i;
-	int start;
+	int	i;
+	int	start;
 
 	i = 0;
 	if (str[i] == '\'')

@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 17:33:54 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:45:10 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	invalid_input(char *str)
 	return (0);
 }
 
-// en el subject pone "No interpretar comillas sin cerrar o caracteres 
+// en el subject pone "No interpretar comillas sin cerrar o caracteres
 // especiales no especificados en el enunciado como \ (barra invertida)
 // o ; (punto y coma)." pero yo lo puse como que no ejecute nada,
-// pero en la terminal normal simplemente la ignora literalmente 
+// pero en la terminal normal simplemente la ignora literalmente
 // (echo hola\mundo holamundo) asi que tenngo que arreglar eso,
 // y tambien que no se cierre la mini.

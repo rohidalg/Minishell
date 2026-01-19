@@ -6,24 +6,22 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/19 17:29:42 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:44:55 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_exit_status = 0;
+int		g_exit_status = 0;
 
 void	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
 	if (!cmd || cmd[0] == NULL)
 		return ;
-	if (ft_strcmp(cmd[0], "pwd") == 0
-		|| ft_strcmp(cmd[0], "exit")  == 0
+	if (ft_strcmp(cmd[0], "pwd") == 0 || ft_strcmp(cmd[0], "exit") == 0
 		|| ft_strcmp(cmd[0], "env") == 0)
 		pwd_exit_env(cmd, g_env);
-	else if (ft_strcmp(cmd[0], "unset") == 0
-		|| ft_strcmp(cmd[0], "export") == 0
+	else if (ft_strcmp(cmd[0], "unset") == 0 || ft_strcmp(cmd[0], "export") == 0
 		|| ft_strcmp(cmd[0], "cd") == 0)
 		unset_export_cd_echo(cmd, g_env, vars);
 }
@@ -46,7 +44,7 @@ int	header(char **g_env, t_vars **vars)
 				if (cmd && cmd[0])
 					check_built_in(cmd, &g_env, vars);
 				add_history(input);
-				run_pipex(input, g_env);
+				// run_pipex(input, g_env);
 				ft_free(cmd);
 			}
 		}
@@ -57,14 +55,14 @@ int	header(char **g_env, t_vars **vars)
 
 void	run_pipex(char *input, char **g_env)
 {
-	pid_t pid;
-	int status;
+	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("fork");
-		return;
+		return ;
 	}
 	if (pid == 0)
 	{
@@ -75,7 +73,7 @@ void	run_pipex(char *input, char **g_env)
 		waitpid(pid, &status, 0); // Proceso padre: espera a que termine el hijo
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char	**g_env;
 	t_vars	*vars;

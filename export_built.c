@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:53:40 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 16:40:35 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:47:59 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ int	valid_var_name(char *var)
 	return (1);
 }
 
-
 int	find_var(char *var_to_see, t_vars *vars_list)
 {
 	t_vars	*tmp;
 	char	*var_name;
 	char	*var_value;
-	
+
 	if (!vars_list || !var_to_see)
 		return (0);
 	var_name = get_var_name(var_to_see);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   others_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2026/01/19 16:40:41 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:46:37 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	builtin_pwd(void)
 	free(cwd);
 	g_exit_status = 0;
 }
-
 
 char	**get_entire_env(char **env)
 {
@@ -86,8 +85,8 @@ void	unset_export_cd_echo(char **cmd, char ***g_env, t_vars **vars)
 		return ;
 	else if (ft_strcmp(cmd[0], "unset") == 0)
 		*vars = builtin_unset(cmd, *vars, *g_env);
-	else if (ft_strcmp(cmd[0], "export") == 0)				
-    	*g_env = builtin_export(cmd, vars, *g_env);
+	else if (ft_strcmp(cmd[0], "export") == 0)
+		*g_env = builtin_export(cmd, vars, *g_env);
 	else if (strcmp(cmd[0], "cd") == 0)
 		*g_env = builtin_cd(cmd, vars, *g_env);
 }

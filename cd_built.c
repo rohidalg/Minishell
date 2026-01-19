@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_built.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:00:10 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 16:44:12 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:49:55 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	cd_chdir_fail(char *target)
 	ft_putendl_fd(strerror(errno), 2);
 }
 
-char	**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd, char *newpwd)
+char	**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd,
+		char *newpwd)
 {
 	char	*line;
 
@@ -56,7 +57,8 @@ char	**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd, char *newpwd)
 	return (g_env);
 }
 
-char	**cd_ret(char *oldpwd, char *target, char *newpwd, char **g_env, int status)
+char	**cd_ret(char *oldpwd, char *target, char *newpwd, char **g_env,
+		int status)
 {
 	free(oldpwd);
 	free(target);
