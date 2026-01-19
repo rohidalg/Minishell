@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/19 17:29:08 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:29:42 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	header(char **g_env, t_vars **vars)
 			{
 				cmd = ft_split(input, ' ');
 				if (cmd && cmd[0])
-					check_built_in(cmd, env, g_env, vars);
+					check_built_in(cmd, &g_env, vars);
 				add_history(input);
-				run_pipex(input, env);
+				run_pipex(input, g_env);
 				ft_free(cmd);
 			}
 		}
