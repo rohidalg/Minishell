@@ -6,38 +6,38 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/09 13:30:52 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:29:08 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void check_built_in(char **cmd, char **env, char **g_env, t_vars **vars)
+int	g_exit_status = 0;
+
+void	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
 	if (!cmd || cmd[0] == NULL)
-		return;
-	if (strcmp(cmd[0], "pwd") == 0)
-		built_pwd();
-	else if (strcmp(cmd[0], "exit") == 0)
-		exit(EXIT_SUCCESS);
-	else if (strcmp(cmd[0], "env") == 0)
-		built_env(g_env);
-	else if (ft_strcmp(cmd[0], "unset") == 0)
-		*vars = builtin_unset(cmd, *vars, env, g_env);
+		return ;
+	if (ft_strcmp(cmd[0], "pwd") == 0
+		|| ft_strcmp(cmd[0], "exit")  == 0
+		|| ft_strcmp(cmd[0], "env") == 0)
+		pwd_exit_env(cmd, g_env);
+	else if (ft_strcmp(cmd[0], "unset") == 0
+		|| ft_strcmp(cmd[0], "export") == 0
+		|| ft_strcmp(cmd[0], "cd") == 0)
+		unset_export_cd_echo(cmd, g_env, vars);
 }
-// else if (strcmp(cmd, "cd") == 0)
-// 	built_cd(cmd[1]);
 
-int header(char **env, char **g_env, t_vars **vars)
+int	header(char **g_env, t_vars **vars)
 {
-	char *input;
-	char **cmd;
+	char	*input;
+	char	**cmd;
 
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (!input)
-			break;
+			break ;
 		if (*input)
 		{
 			if (!invalid_input(input))
@@ -55,7 +55,7 @@ int header(char **env, char **g_env, t_vars **vars)
 	return (0);
 }
 
-void run_pipex(char *input, char **env)
+void	run_pipex(char *input, char **g_env)
 {
 	pid_t pid;
 	int status;
@@ -68,7 +68,7 @@ void run_pipex(char *input, char **env)
 	}
 	if (pid == 0)
 	{
-		ft_exec(input, env); // Proceso hijo: ejecuta el comando
+		ft_exec(input, g_env); // Proceso hijo: ejecuta el comando
 		exit(127);
 	}
 	else
@@ -77,17 +77,16 @@ void run_pipex(char *input, char **env)
 
 int main(int argc, char **argv, char **env)
 {
-	char **g_env;
-	t_vars *vars;
+	char	**g_env;
+	t_vars	*vars;
 
 	(void)argc;
 	(void)argv;
 	g_env = NULL;
 	g_env = get_entire_env(env);
 	vars = init_vars_from_env(g_env);
-	header(env, g_env, &vars);
+	header(g_env, &vars);
 	return (0);
 }
-
 
 // implementar el pipe y que acepte los '\' entre comillas

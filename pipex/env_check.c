@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 18:25:21 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/07 20:08:53 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:11:21 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,16 @@ char *expand_in_quotes(const char *str, char **env)
 	i = 0;
 	start = ++i;
 	while (str[i] && str[i] != '"')
+	start = ++i;
+	while (str[i] && str[i] != '"')
 	{
+		if (str[i] == '$')
+		{
+			v = ++i;
+			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+				i++;
+			var = ft_getenv(ft_substr(str, v, i - v), env);
+			return (ft_strjoin(ft_substr(str, start, v - start - 1), var));
 		if (str[i] == '$')
 		{
 			v = ++i;
@@ -53,3 +62,4 @@ char *ft_quotes(const char *str, char **env)
 		return (expand_in_quotes(str, env));
 	return (ft_strdup(str));
 }
+

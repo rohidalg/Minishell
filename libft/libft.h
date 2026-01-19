@@ -6,12 +6,13 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 11:55:13 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/10/13 19:38:20 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:12:12 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+// # include "../minishell.h"
 // # include "../minishell.h"
 # include <stddef.h>
 # include <stdio.h>
@@ -41,7 +42,7 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
-int					ft_strcmp(char *s1, char *s2);
+int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *str1, const char *str2, size_t num);
 void				*ft_memchr(const void *str, int c, size_t n);
 int					ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
@@ -54,6 +55,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_free(char **string);
+int					skip_quotes(const char *str, int *i);
 int					skip_quotes(const char *str, int *i);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);

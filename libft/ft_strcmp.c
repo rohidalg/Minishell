@@ -6,24 +6,19 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:36:59 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/12/10 18:25:55 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:08:06 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!s1)
-		return (1);
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+

@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 19:34:58 by wiljimen          #+#    #+#             */
-/*   Updated: 2025/12/10 18:18:16 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:35:37 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ int	is_valid_var_name(char *name)
 {
 	int	i;
 
-	i = 1;
-	if (!name || (!ft_isalpha(name[0]) || name[0] != '_'))
+	if (!name || !name[0])
 		return (0);
+	if (!ft_isalpha(name[0]) && name[0] != '_')
+		return (0);
+	i = 1;
 	while (name[i])
 	{
-		if (!ft_isalnum(name[i]) || name[i] != '_')
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 			return (0);
 		i++;
 	}
@@ -100,23 +102,30 @@ void	unset_var_from_array(char **array, char *var_delete)
 
 // args = ["unset", "HOME", "PATH", NULL]
 
-t_vars	*builtin_unset(char **args, t_vars *vars, char **env, char **g_env)
+t_vars	*builtin_unset(char **args, t_vars *vars, char **g_env)
 {
 	int	i;
+	int	status;
 
+	status = 0;
 	i = 1;
 	while (args[i])
 	{
 		if (!is_valid_var_name(args[i]))
-			printf("minishell: unset: `%s`: not a valid identifier\n", args[i]);
+		{
+			ft_putstr_fd("minishell: unset: `", 2);
+			ft_putstr_fd(args[i], 2);
+			ft_putendl_fd("': not a valid identifier", 2);
+			status = 1;
+		}
 		else
 		{
-			unset_var_from_array(env, args[i]);
 			unset_var_from_array(g_env, args[i]);
 			vars = built_unset(vars, args[i]);
 		}
 		i++;
 	}
+	g_exit_status = status;
 	return (vars);
 }
 

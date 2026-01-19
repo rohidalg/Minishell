@@ -16,3 +16,7 @@ W== 07/10/2025 part 2 --> Se creó el built de pwd, de cd y el de env, junto al 
                         funcionamiento por que en mi caso uso envp y hace falta env.
 
 W== 25/11/2025 --> El built-in de unset está casi listo, falta programar la actualización de ambos env, tanto g_env como env.
+
+W== 20/12/2025 --> El bult-in de unset y de export está listo, también modifiqué las funciones para que solo se actualice el
+                    g_env, sin tocar el original, para eso tenemos el bash real, o eso entiendo, por lo que ya debería de funcionar
+                    sin problema, compila y de momento sirve.
