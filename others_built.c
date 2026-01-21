@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   others_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2026/01/19 17:46:37 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/21 00:55:00 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	unset_export_cd_echo(char **cmd, char ***g_env, t_vars **vars)
 		*g_env = builtin_export(cmd, vars, *g_env);
 	else if (strcmp(cmd[0], "cd") == 0)
 		*g_env = builtin_cd(cmd, vars, *g_env);
+	else if (strcmp(cmd[0], "echo") == 0)
+		builtin_echo(cmd);
 }

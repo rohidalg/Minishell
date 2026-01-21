@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/19 17:44:55 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:22:20 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,52 @@
 
 int		g_exit_status = 0;
 
-void	check_built_in(char **cmd, char ***g_env, t_vars **vars)
+int	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
 	if (!cmd || cmd[0] == NULL)
-		return ;
+		return (0);
 	if (ft_strcmp(cmd[0], "pwd") == 0 || ft_strcmp(cmd[0], "exit") == 0
 		|| ft_strcmp(cmd[0], "env") == 0)
+	{
 		pwd_exit_env(cmd, g_env);
+		return (1);	
+	}
 	else if (ft_strcmp(cmd[0], "unset") == 0 || ft_strcmp(cmd[0], "export") == 0
-		|| ft_strcmp(cmd[0], "cd") == 0)
+		|| ft_strcmp(cmd[0], "cd") == 0 || ft_strcmp(cmd[0], "echo") == 0)
+	{
 		unset_export_cd_echo(cmd, g_env, vars);
+		return (1);
+	}
+	return (0);
+}
+
+static void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
+{
+	char	**cmd;
+	int		is_builtin;
+
+	cmd = ft_split(input, ' ');
+	is_builtin = 0;
+	if (cmd && cmd[0])
+		is_builtin = check_built_in(cmd, g_env, vars);
+	if (!is_builtin)
+		run_pipex(input, *g_env);
+	ft_free(cmd);
 }
 
 int	header(char **g_env, t_vars **vars)
 {
 	char	*input;
-	char	**cmd;
 
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (!input)
 			break ;
-		if (*input)
+		if (*input && !invalid_input(input))
 		{
-			if (!invalid_input(input))
-			{
-				cmd = ft_split(input, ' ');
-				if (cmd && cmd[0])
-					check_built_in(cmd, &g_env, vars);
-				add_history(input);
-				// run_pipex(input, g_env);
-				ft_free(cmd);
-			}
+			add_history(input);
+			pipex_or_builtin(input, &g_env, vars);
 		}
 		free(input);
 	}

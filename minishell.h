@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 17:48:59 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:10:23 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void				run_pipex(char *input, char **g_env);
 
 //------------------------BUILTS-IN------------------------//
 
-void				check_built_in(char **cmd, char ***g_env, t_vars **vars);
+int					check_built_in(char **cmd, char ***g_env, t_vars **vars);
 void				unset_export_cd_echo(char **cmd, char ***g_env,
 						t_vars **vars);
 void				pwd_exit_env(char **cmd, char ***g_env);
@@ -70,6 +70,8 @@ char				**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd,
 char				**cd_ret(char *oldpwd, char *target, char *newpwd,
 						char **g_env, int status);
 char				**builtin_cd(char **args, t_vars **vars, char **g_env);
+int					is_valid_n_flag(char *arg);
+void				builtin_echo(char **args);
 
 //-----------------------VARIABLES-----------------------------//
 

@@ -26,6 +26,7 @@ SRCs =	parse.c	\
 		export_utils.c \
 		cd_built.c \
 		cd_utils.c \
+		echo_built.c
 
 MAKEFLAG += --silent
 
