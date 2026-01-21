@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/20 21:22:20 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/21 22:37:36 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,23 @@ static void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
 	ft_free(cmd);
 }
 
-int	header(char **g_env, t_vars **vars)
+int	header(char ***g_env, t_vars **vars)
 {
 	char	*input;
 
 	while (1)
 	{
+		handle_signals();
 		input = readline("minishell> ");
 		if (!input)
+		{
+			ft_putstr_fd("exit\n", 2);
 			break ;
+		}
 		if (*input && !invalid_input(input))
 		{
 			add_history(input);
-			pipex_or_builtin(input, &g_env, vars);
+			pipex_or_builtin(input, g_env, vars);
 		}
 		free(input);
 	}
@@ -96,8 +100,9 @@ int	main(int argc, char **argv, char **env)
 	g_env = NULL;
 	g_env = get_entire_env(env);
 	vars = init_vars_from_env(g_env);
-	header(g_env, &vars);
-	return (0);
+	header(&g_env, &vars);
+	minishell_cleanup(&g_env, &vars);
+	return (g_exit_status);
 }
 
 // implementar el pipe y que acepte los '\' entre comillas

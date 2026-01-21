@@ -26,7 +26,9 @@ SRCs =	parse.c	\
 		export_utils.c \
 		cd_built.c \
 		cd_utils.c \
-		echo_built.c
+		echo_built.c \
+		signals.c \
+		minishell_cleanup.c
 
 MAKEFLAG += --silent
 

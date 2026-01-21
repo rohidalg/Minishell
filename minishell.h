@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/20 21:10:23 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/21 22:37:08 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_vars
 
 //------------------------parse.c------------------------//
 
-int					header(char **g_env, t_vars **vars);
+int					header(char ***g_env, t_vars **vars);
 void				run_pipex(char *input, char **g_env);
 
 //------------------------BUILTS-IN------------------------//
@@ -72,6 +72,7 @@ char				**cd_ret(char *oldpwd, char *target, char *newpwd,
 char				**builtin_cd(char **args, t_vars **vars, char **g_env);
 int					is_valid_n_flag(char *arg);
 void				builtin_echo(char **args);
+void				minishell_cleanup(char ***env, t_vars **vars);
 
 //-----------------------VARIABLES-----------------------------//
 
@@ -92,6 +93,11 @@ int					env_replace(char *arg, char **g_env);
 char				**env_set(char *arg, char **g_env);
 int					vars_counter(t_vars *vars);
 char				**vars_copy(t_vars *vars);
+
+//------------------------SIGNALS-----------------------------//
+
+void				handle_signals(void);
+void				signals_handler(int sig);
 
 //------------------------mini_utils.c------------------------//
 
