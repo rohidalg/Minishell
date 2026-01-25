@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 14:46:56 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 15:37:43 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/24 17:15:19 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,56 @@ static void	remove_two_tokens(char **args, int i)
 	args[k + 1] = NULL;
 }
 
+static int	redirect_heredoc(char *delim)
+{
+	int		fd[2];
+	char	*line;
+
+	if (!delim || pipe(fd) == -1)
+		return (perror("pipe"), -1);
+	while (1)
+	{
+		line = readline("> ");
+		if (!line)
+			return (close(fd[0]), close(fd[1]), -1);
+		if (!strcmp(line, delim))
+			break ;
+		write(fd[1], line, strlen(line));
+		write(fd[1], "\n", 1);
+		free(line);
+	}
+	free(line);
+	close(fd[1]);
+	if (dup2(fd[0], STDIN_FILENO) < 0)
+		return (perror("dup2"), close(fd[0]), -1);
+	return (close(fd[0]), 0);
+}
+
 char	**redirect(char **args)
 {
 	int	i;
 	int	append;
 
 	i = 0;
-	while (args[i])
+	while (args && args[i])
 	{
-		if (args[i][0] == '<' && !args[i][1] && args[i + 1])
+		if (!ft_strcmp(args[i], "<<") && args[i + 1])
+		{
+			if (redirect_heredoc(args[i + 1]) < 0)
+				return (NULL);
+			remove_two_tokens(args, i);
+			continue ;
+		}
+		if (!ft_strcmp(args[i], "<") && args[i + 1])
 		{
 			if (redirect_input(args[i + 1]) < 0)
 				return (NULL);
 			remove_two_tokens(args, i);
 			continue ;
 		}
-		if (args[i][0] == '>' && args[i + 1])
+		append = (!ft_strcmp(args[i], ">>"));
+		if ((!ft_strcmp(args[i], ">") || append) && args[i + 1])
 		{
-			append = (args[i][1] == '>');
 			if (redirect_output(args[i + 1], append) < 0)
 				return (NULL);
 			remove_two_tokens(args, i);
@@ -98,3 +130,4 @@ char	**redirect(char **args)
 	}
 	return (args);
 }
+

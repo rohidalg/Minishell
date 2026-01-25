@@ -6,20 +6,31 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 17:45:10 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:40:12 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	update_quote(char c, char *q)
+{
+	if (*q == 0 && (c == '\'' || c == '"'))
+		*q = c;
+	else if (*q == c)
+		*q = 0;
+}
+
 int	invalid_input(char *str)
 {
-	int	i;
+	int		i;
+	char	q;
 
 	i = 0;
-	while (str[i])
+	q = 0;
+	while (str && str[i])
 	{
-		if (str[i] == '\\' || str[i] == ';')
+		update_quote(str[i], &q);
+		if (q == 0 && (str[i] == '\\' || str[i] == ';'))
 		{
 			fprintf(stderr, "Error: caracter no permitido '%c'\n", str[i]);
 			return (1);
@@ -28,10 +39,3 @@ int	invalid_input(char *str)
 	}
 	return (0);
 }
-
-// en el subject pone "No interpretar comillas sin cerrar o caracteres
-// especiales no especificados en el enunciado como \ (barra invertida)
-// o ; (punto y coma)." pero yo lo puse como que no ejecute nada,
-// pero en la terminal normal simplemente la ignora literalmente
-// (echo hola\mundo holamundo) asi que tenngo que arreglar eso,
-// y tambien que no se cierre la mini.

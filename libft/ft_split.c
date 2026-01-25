@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 18:40:41 by rohidalg          #+#    #+#             */
-/*   Updated: 2025/12/10 18:26:15 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/25 00:09:24 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,20 @@ int	ft_countwords(const char *str, char c)
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		while (str[i] == c)
 			i++;
 		if (!str[i])
 			break ;
-		if (str[i] == '\'' || str[i] == '"')
-			skip_quotes(str, &i);
-		else
-			while (str[i] && str[i] != c && str[i] != '\'' && str[i] != '"')
-				i++;
 		count++;
+		while (str[i] && str[i] != c)
+		{
+			if (str[i] == '\'' || str[i] == '"')
+				skip_quotes(str, &i);
+			else
+				i++;
+		}
 	}
 	return (count);
 }
@@ -72,11 +74,13 @@ char	*ft_words(const char *str, char c, int *i)
 	if (!str[*i])
 		return (NULL);
 	start = *i;
-	if (str[*i] == '\'' || str[*i] == '"')
-		len = skip_quotes(str, i);
-	else
-		while (str[*i] && str[*i] != c)
+	while (str[*i] && str[*i] != c)
+	{
+		if (str[*i] == '\'' || str[*i] == '"')
+			skip_quotes(str, i);
+		else
 			(*i)++;
+	}
 	len = *i - start;
 	word = malloc(len + 1);
 	if (!word)
@@ -89,6 +93,8 @@ char	**ft_free(char **string)
 {
 	int	i;
 
+	if (!string)
+		return (NULL);
 	i = 0;
 	while (string[i])
 	{
@@ -96,7 +102,7 @@ char	**ft_free(char **string)
 		i++;
 	}
 	free(string);
-	return (0);
+	return (NULL);
 }
 
 char	**ft_split(char const *str, char c)

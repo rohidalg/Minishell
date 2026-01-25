@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/21 22:37:08 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:30:32 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,12 @@ void				signals_handler(int sig);
 //------------------------mini_utils.c------------------------//
 
 int					invalid_input(char *str);
+
+//------------------------pipe.c------------------------//
+
+int	has_pipe(char *s);
+void	run_pipeline(char *input, char **env);
+void	run_line(char *input, char **env);
+
 
 #endif

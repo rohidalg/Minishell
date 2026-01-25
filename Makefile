@@ -28,7 +28,8 @@ SRCs =	parse.c	\
 		cd_utils.c \
 		echo_built.c \
 		signals.c \
-		minishell_cleanup.c
+		minishell_cleanup.c \
+		pipe.c
 
 MAKEFLAG += --silent
 

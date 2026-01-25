@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/19 17:45:23 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/24 17:18:24 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <fcntl.h>
 # include <string.h>
 # include <sys/wait.h>
+#include <readline/readline.h>
+#include <stdlib.h>
+
 
 //------------------------pipex.c------------------------//
 

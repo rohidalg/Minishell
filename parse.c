@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/21 22:37:36 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:29:37 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
 	char	**cmd;
 	int		is_builtin;
 
+	if (has_pipe(input))
+		return (run_pipeline(input, *g_env));
 	cmd = ft_split(input, ' ');
 	is_builtin = 0;
 	if (cmd && cmd[0])
