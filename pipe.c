@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:42:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/25 20:14:37 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:21:58 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void run_pipeline(char *input, char **env)
 
     cmds = ft_split(input, '|');
     n = array_len(cmds);
-    p = (n > 0) * malloc(sizeof(pid_t) * n); // error de malloc, hay que arreglarlo
+    p = malloc(sizeof(pid_t) * n); // error de malloc, hay que arreglarlo
     if (!cmds || n == 0 || !p)
         return (ft_free(cmds), free(p));
     i = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/24 17:18:24 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/26 11:47:06 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int		ft_file(char *file, int option);
 void	ft_exec(char *command, char **env);
 
 //------------------------env_check.c------------------------//
+
+char	**prepare_args(char **args);
+void	apply_quotes(char **args, char **env);
 char	*expand_in_quotes(const char *str, char **env);
 char	*ft_quotes(const char *str, char **env);
 

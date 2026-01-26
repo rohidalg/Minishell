@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/24 23:40:12 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:31:41 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,37 @@ int	invalid_input(char *str)
 		update_quote(str[i], &q);
 		if (q == 0 && (str[i] == '\\' || str[i] == ';'))
 		{
-			fprintf(stderr, "Error: caracter no permitido '%c'\n", str[i]);
+			fprintf(stderr, "Error: '%c'\n", str[i]);
 			return (1);
 		}
 		i++;
 	}
 	return (0);
 }
+
+char	*remove_quotes(const char *s)
+{
+	size_t	i;
+	size_t	j;
+	char	q;
+	char	*res;
+
+	if (!s)
+		return (NULL);
+	res = ft_calloc(ft_strlen(s) + 1, sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	q = 0;
+	while (s[i])
+	{
+		if ((s[i] == '\'' || s[i] == '"') && (q == 0 || q == s[i]))
+			update_quote(s[i], &q);
+		else
+			res[j++] = s[i];
+		i++;
+	}
+	return (res);
+}
+

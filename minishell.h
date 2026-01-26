@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/24 23:30:32 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/25 20:35:31 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_vars
 	struct s_vars	*next;
 }					t_vars;
 
-//------------------------parse.c------------------------//
+//------------------------PARSING------------------------//
 
 int					header(char ***g_env, t_vars **vars);
 void				run_pipex(char *input, char **g_env);
@@ -99,15 +99,16 @@ char				**vars_copy(t_vars *vars);
 void				handle_signals(void);
 void				signals_handler(int sig);
 
-//------------------------mini_utils.c------------------------//
+//--------------------------QUOTES----------------------------//
 
 int					invalid_input(char *str);
+char				*remove_quotes(const char *s);
 
-//------------------------pipe.c------------------------//
+//------------------------PIPES------------------------------//
 
-int	has_pipe(char *s);
-void	run_pipeline(char *input, char **env);
-void	run_line(char *input, char **env);
+int					has_pipe(char *s);
+void				run_pipeline(char *input, char **env);
+void				run_line(char *input, char **env);
 
 
 #endif

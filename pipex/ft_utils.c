@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/25 00:03:02 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/26 16:51:29 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,38 +85,38 @@ static void	exec_cmd(char **argv, char **env)
 		ft_putendl_fd(argv[0], 2);
 		exit(127);
 	}
+	if (access(path, X_OK) != 0)
+	{
+		perror(argv[0]);
+		free(path);
+		exit(126);
+	}
 	execve(path, argv, env);
 	perror(argv[0]);
+	free(path);
 	exit(126);
 }
 
 void	ft_exec(char *command, char **env)
 {
-	char	**cmmd_part;
+	char	**args;
 	char	**orig;
-	int		i;
-	char	*tmp;
 
-	cmmd_part = ft_split(command, ' ');
-	if (!cmmd_part)
+	args = ft_split(command, ' ');
+	if (!args)
 		return ;
-	i = 0;
-	while (cmmd_part[i])
+	apply_quotes(args, env);
+	orig = args;
+	args = prepare_args(args);
+	if (!args)
 	{
-		tmp = ft_quotes(cmmd_part[i], env);
-		if (tmp)
-		{
-			free(cmmd_part[i]);
-			cmmd_part[i] = tmp;
-		}
-		i++;
+		ft_free(orig);
+		exit(1);
 	}
-	orig = cmmd_part;
-	cmmd_part = redirect(cmmd_part);
-	if (!cmmd_part)
-		return (ft_free(orig), exit(1));
-	if (!cmmd_part[0])
-		return (ft_free(cmmd_part), exit(0));
-	exec_cmd(cmmd_part, env);
+	if (!args[0])
+	{
+		ft_free(args);
+		exit(0);
+	}
+	exec_cmd(args, env);
 }
-
