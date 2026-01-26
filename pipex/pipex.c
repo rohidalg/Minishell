@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:36:17 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 11:45:22 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:56:10 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*ft_getpath(char *cmd, char **env)
 	{
 		if (access(cmd, F_OK) == 0)
 			res = ft_strdup(cmd);
+		if (access(cmd, X_OK) == 0)
+    		res = ft_strdup(cmd);
 		return (res);
 	}
 	path_env = ft_getenv("PATH", env);
