@@ -29,11 +29,15 @@ SRCs =	parse.c	\
 		echo_built.c \
 		signals.c \
 		minishell_cleanup.c \
-		pipe.c \
 		ft_split_quotes.c \
 		expansor_helpers.c \
 		exp_exit_var.c \
 		parser_helpers.c
+		pipe_entry.c \
+		pipe_runtime.c \
+		pipe_syntax.c \
+		pipe_trim.c \
+		pipe.c 
 
 MAKEFLAG += --silent
 

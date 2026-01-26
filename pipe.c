@@ -3,141 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 22:42:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 17:21:25 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 20:07:21 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int has_pipe(char *s)
+int	pipeline_prepare(t_pipe_data *d, char *input)
 {
-    int i;
-
-    i = 0;
-    while (s && s[i])
-    {
-        if (s[i] == '|')
-            return (1);
-        i++;
-    }
-    return (0);
-}
-static void trim_cmd(char *s)
-{
-    int i;
-    int end;
-
-    if (!s)
-        return;
-    i = 0;
-    while (s[i] == ' ' || s[i] == '\t')
-        i++;
-    if (i)
-        ft_memmove(s, s + i, ft_strlen(s + i) + 1);
-    end = (int)ft_strlen(s);
-    while (end > 0 && (s[end - 1] == ' ' || s[end - 1] == '\t' || s[end - 1] == '\n' || s[end - 1] == '\r'))
-        s[--end] = '\0';
+	if (pipe_syntax_str(input))
+		return (1);
+	d->cmds = ft_split(input, '|');
+	if (!d->cmds)
+		return (1);
+	trim_all(d->cmds);
+	d->n = array_len(d->cmds);
+	d->pids = malloc(sizeof(pid_t) * d->n);
+	if (!d->pids)
+	{
+		ft_free(d->cmds);
+		return (1);
+	}
+	d->prev = -1;
+	d->i = 0;
+	return (0);
 }
 
-static int array_len(char **a)
+static void	fill_stage(t_stage *st, t_pipe_data *d, char **env)
 {
-    int i;
-
-    i = 0;
-    while (a && a[i])
-        i++;
-    return (i);
+	st->prev = d->prev;
+	st->fd[0] = d->fd[0];
+	st->fd[1] = d->fd[1];
+	st->last = (d->i == d->n - 1);
+	st->cmd = d->cmds[d->i];
+	st->env = env;
 }
 
-static void wait_pids(pid_t *p, int n)
+static int	open_pipe_if_needed(t_pipe_data *d)
 {
-    int i;
-
-    i = 0;
-    while (i < n)
-    {
-        if (p[i] > 0)
-            waitpid(p[i], NULL, 0);
-        i++;
-    }
+	if (d->i < d->n - 1 && pipe(d->fd) == -1)
+	{
+		perror("pipe");
+		return (1);
+	}
+	return (0);
 }
 
-static void close_fds(int prev, int *fd, int has_fd)
+static int	fork_and_run(t_pipe_data *d, char **env)
 {
-    if (prev != -1)
-        close(prev);
-    if (has_fd)
-    {
-        close(fd[0]);
-        close(fd[1]);
-    }
+	t_stage	st;
+
+	d->pids[d->i] = fork();
+	if (d->pids[d->i] == 0)
+	{
+		fill_stage(&st, d, env);
+		child_stage(st);
+	}
+	if (d->pids[d->i] < 0)
+	{
+		perror("fork");
+		return (1);
+	}
+	return (0);
 }
 
-static void child_stage(int prev, int *fd, int last, char *cmd, char **env)
+void	run_pipeline(char *input, char **env)
 {
-    if (prev != -1 && dup2(prev, 0) < 0)
-        exit(1);
-    if (!last && dup2(fd[1], 1) < 0)
-        exit(1);
-    close_fds(prev, fd, !last);
-    ft_exec(cmd, env);
-    exit(127);
-}
+	t_pipe_data	d;
 
-static void pipeline_fail(char **cmds, pid_t *p, int i, int *fd)
-{
-    if (i > 0)
-        close_fds(-1, fd, 1);
-    wait_pids(p, i);
-    ft_free(cmds);
-    free(p);
-}
-
-void run_pipeline(char *input, char **env)
-{
-    char **cmds;
-    pid_t *p;
-    int i, n, prev, fd[2];
-
-    cmds = ft_split(input, '|');
-    n = array_len(cmds);
-    p = malloc(sizeof(pid_t) * n);
-    if (!cmds || n == 0 || !p)
-        return (ft_free(cmds), free(p));
-    i = -1;
-    while (++i < n)
-        trim_cmd(cmds[i]);
-    prev = -1;
-    i = 0;
-    while (i < n)
-    {
-        if (i < n - 1 && pipe(fd) == -1)
-            return (perror("pipe"), pipeline_fail(cmds, p, i, fd));
-        p[i] = fork();
-        if (p[i] == 0)
-            child_stage(prev, fd, (i == n - 1), cmds[i], env);
-        if (p[i] < 0)
-            return (perror("fork"), pipeline_fail(cmds, p, i, fd));
-        if (prev != -1)
-            close(prev);
-        if (i < n - 1)
-            close(fd[1]), prev = fd[0];
-        i++;
-    }
-    wait_pids(p, n);
-    ft_free(cmds);
-    free(p);
-}
-
-void run_line(char *input, char **env)
-{
-    if (!input || !*input)
-        return;
-    if (has_pipe(input))
-        run_pipeline(input, env);
-    else
-        run_pipex(input, env);
+	if (pipeline_prepare(&d, input))
+		return ;
+	while (d.i < d.n)
+	{
+		if (open_pipe_if_needed(&d))
+			return (cleanup_pipeline(&d, d.i));
+		if (fork_and_run(&d, env))
+			return (cleanup_pipeline(&d, d.i));
+		if (d.prev != -1)
+			close(d.prev);
+		if (d.i < d.n - 1)
+		{
+			close(d.fd[1]);
+			d.prev = d.fd[0];
+		}
+		d.i++;
+	}
+	wait_pids(d.pids, d.n);
+	ft_free(d.cmds);
+	free(d.pids);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 19:44:17 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 20:06:27 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,25 @@ typedef struct s_vars
 	char			*value;
 	struct s_vars	*next;
 }					t_vars;
+
+typedef struct s_pipe_data
+{
+	char	**cmds;
+	pid_t	*pids;
+	int		n;
+	int		i;
+	int		prev;
+	int		fd[2];
+}	t_pipe_data;
+
+typedef struct s_stage
+{
+	int		prev;
+	int		fd[2];
+	int		last;
+	char	*cmd;
+	char	**env;
+}	t_stage;
 
 //------------------------PARSING------------------------//
 
@@ -119,9 +138,26 @@ char				*append_char(char *s, char c);
 
 //------------------------PIPES------------------------------//
 
-int					has_pipe(char *s);
-void				run_pipeline(char *input, char **env);
-void				run_line(char *input, char **env);
+// int					has_pipe(char *s);
+// void				run_pipeline(char *input, char **env);
+// void				run_line(char *input, char **env);
+/* entry */
+void	run_line(char *input, char **env);
+void	run_pipeline(char *input, char **env);
+
+/* syntax */
+int		has_pipe(char *s);
+int		pipe_syntax_str(char *s);
+
+/* trim/utils */
+int		array_len(char **a);
+void	trim_all(char **cmds);
+
+/* pipeline internals */
+int		pipeline_prepare(t_pipe_data *d, char *input);
+void	cleanup_pipeline(t_pipe_data *d, int started);
+void	wait_pids(pid_t *p, int n);
+void	child_stage(t_stage st);
 
 
 #endif

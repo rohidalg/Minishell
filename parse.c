@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/26 19:41:26 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 20:06:44 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		g_exit_status = 0;
+int			g_exit_status = 0;
 
 int	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
@@ -22,7 +22,7 @@ int	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 		|| ft_strcmp(cmd[0], "env") == 0)
 	{
 		pwd_exit_env(cmd, g_env);
-		return (1);	
+		return (1);
 	}
 	else if (ft_strcmp(cmd[0], "unset") == 0 || ft_strcmp(cmd[0], "export") == 0
 		|| ft_strcmp(cmd[0], "cd") == 0 || ft_strcmp(cmd[0], "echo") == 0)
