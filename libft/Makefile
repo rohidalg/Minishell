@@ -2,7 +2,7 @@ NAME = libft.a
 
 RM = rm -rf
 MKD = mkdir -p
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCs = ft_isalnum.c  \

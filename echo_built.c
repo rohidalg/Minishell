@@ -6,13 +6,13 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 20:57:41 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/20 21:01:55 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:01:20 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_valid_n_flag(char *arg)
+static int	is_valid_n_flag(char *arg)
 {
 	int	i;
 

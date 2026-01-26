@@ -6,7 +6,7 @@ CLEAR	=	\033[0m
 
 MKD = mkdir -p
 RM = rm -rf
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 MK_LIBFT = $(MAKE) -s -C libft 
@@ -29,7 +29,11 @@ SRCs =	parse.c	\
 		echo_built.c \
 		signals.c \
 		minishell_cleanup.c \
-		pipe.c
+		pipe.c \
+		ft_split_quotes.c \
+		expansor_helpers.c \
+		exp_exit_var.c \
+		parser_helpers.c
 
 MAKEFLAG += --silent
 

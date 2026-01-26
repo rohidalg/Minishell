@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/25 20:35:31 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:44:17 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char				**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd,
 char				**cd_ret(char *oldpwd, char *target, char *newpwd,
 						char **g_env, int status);
 char				**builtin_cd(char **args, t_vars **vars, char **g_env);
-int					is_valid_n_flag(char *arg);
 void				builtin_echo(char **args);
 void				minishell_cleanup(char ***env, t_vars **vars);
 
@@ -103,6 +102,20 @@ void				signals_handler(int sig);
 
 int					invalid_input(char *str);
 char				*remove_quotes(const char *s);
+char				**split_quote_aware(const char *s);
+
+//------------------------EXPANSOR----------------------------//
+
+const char			*get_env_value(const char *var, char **g_env);
+int					is_var_start(char c);
+int					is_var_char(char c);
+int					var_name_len(const char *s);
+char				*expand_string(const char *s, char **env, int last);
+void				expand_args(char **args, char **env, int last);
+void				expand_args_skip_heredoc(char **args, char **env, int last);
+void				run_exec_args(char **args, char **g_env);
+int					exec_error(char *cmd);
+char				*append_char(char *s, char c);
 
 //------------------------PIPES------------------------------//
 

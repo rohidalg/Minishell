@@ -4,7 +4,7 @@ MKL = make -s -C ../libft
 MK = make -s
 MKD = mkdir -p
 RM = rm -rf
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror  #-fsanitize=address -g3
 
 INCLUDES = -I ../libft
