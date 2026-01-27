@@ -6,61 +6,48 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:11:55 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 17:42:02 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:21:54 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	update_quote_state(char c, char *q)
+static int	try_expand(char **out, const char *s, int *i, t_exp *e)
 {
-	if (*q == 0 && (c == '\'' || c == '"'))
-		*q = c;
-	else if (*q != 0 && c == *q)
-		*q = 0;
-}
-
-static int	is_quote_char(char c)
-{
-	return (c == '\'' || c == '"');
-}
-
-static int	try_expand(char **out, const char *s, int *i, char **env, int last,
-		char q)
-{
-	if (s[*i] != '$' || q == '\'')
+	if (s[*i] != '$' || e->q == '\'')
 		return (0);
 	if (s[*i + 1] == '?')
-		return (*out = expansor_exit(*out, i, last), 1);
+		return (*out = expansor_exit(*out, i, e->last), 1);
 	if (is_var_start(s[*i + 1]))
-		return (*out = expansor_var(*out, s, i, env), 1);
+		return (*out = expansor_var(*out, s, i, e->env), 1);
 	return (0);
 }
 
 char	*expand_string(const char *s, char **env, int last)
 {
-	char	q;
+	t_exp	e;
 	char	*out;
 	int		i;
 
-	q = 0;
+	e.env = env;
+	e.last = last;
+	e.q = 0;
 	out = ft_strdup("");
 	i = 0;
 	while (s && s[i])
 	{
-		if (try_expand(&out, s, &i, env, last, q))
+		if (try_expand(&out, s, &i, &e))
 			continue ;
-		if (is_quote_char(s[i]))
-		{
-			update_quote_state(s[i], &q);
-			i++;
-			continue ;
-		}
-		out = append_char(out, s[i]);
-		i++;
+		if ((s[i] == '\'' || s[i] == '"') && e.q == 0)
+			e.q = s[i++];
+		else if (e.q && s[i] == e.q)
+			e.q = 0, i++;
+		else
+			out = append_char(out, s[i++]);
 	}
 	return (out);
 }
+
 
 void	expand_args(char **args, char **env, int last)
 {

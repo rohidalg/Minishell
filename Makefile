@@ -24,6 +24,7 @@ SRCs =	parse.c	\
 		unset_built.c \
 		export_built.c \
 		export_utils.c \
+		export_helpers.c \
 		cd_built.c \
 		cd_utils.c \
 		echo_built.c \

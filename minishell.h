@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 17:43:00 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:18:32 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct s_vars
 	char			*value;
 	struct s_vars	*next;
 }					t_vars;
+
+typedef struct s_exp
+{
+	char	**env;
+	int		last;
+	char	q;
+}	t_exp;
+
 
 typedef struct s_pipe_data
 {
@@ -85,8 +93,6 @@ int					cd_is_dash(char **args);
 void				cd_chdir_fail(char *target);
 char				**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd,
 						char *newpwd);
-char				**cd_ret(char *oldpwd, char *target, char *newpwd,
-						char **g_env, int status);
 char				**builtin_cd(char **args, t_vars **vars, char **g_env);
 void				builtin_echo(char **args);
 void				minishell_cleanup(char ***env, t_vars **vars);
@@ -96,6 +102,7 @@ void				minishell_cleanup(char ***env, t_vars **vars);
 int					var_same(char *var_name, char *name);
 int					valid_var_name(char *var);
 t_vars				*vars_find(t_vars *vars, char *name);
+t_vars				*find_var_helper(t_vars *lst, char *name);
 int					find_var(char *var_to_see, t_vars *vars_list);
 void				vars_add_new(char *arg, t_vars **vars);
 int					vars_set_if_exists(char *arg, t_vars *vars);

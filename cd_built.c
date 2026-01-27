@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_built.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:00:10 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 17:49:55 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:02:32 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,14 @@ char	**cd_update_pwds(t_vars **vars, char **g_env, char *oldpwd,
 	return (g_env);
 }
 
-char	**cd_ret(char *oldpwd, char *target, char *newpwd, char **g_env,
-		int status)
+static void	cd_cleanup(char *oldpwd, char *target, char *newpwd, int status)
 {
 	free(oldpwd);
 	free(target);
 	free(newpwd);
 	g_exit_status = status;
-	return (g_env);
 }
+
 
 char	**builtin_cd(char **args, t_vars **vars, char **g_env)
 {
@@ -76,15 +75,20 @@ char	**builtin_cd(char **args, t_vars **vars, char **g_env)
 	oldpwd = getcwd(NULL, 0);
 	target = cd_choices(args, *vars);
 	if (!target)
-		return (cd_ret(oldpwd, NULL, NULL, g_env, 1));
+	{
+		cd_cleanup(oldpwd, NULL, NULL, 1);
+		return (g_env);
+	}
 	if (chdir(target) == -1)
 	{
 		cd_chdir_fail(target);
-		return (cd_ret(oldpwd, target, NULL, g_env, 1));
+		cd_cleanup(oldpwd, target, NULL, 1);
+		return (g_env);
 	}
 	newpwd = getcwd(NULL, 0);
 	g_env = cd_update_pwds(vars, g_env, oldpwd, newpwd);
 	if (cd_is_dash(args) && newpwd)
 		printf("%s\n", newpwd);
-	return (cd_ret(oldpwd, target, newpwd, g_env, 0));
+	cd_cleanup(oldpwd, target, newpwd, 0);
+	return (g_env);
 }
