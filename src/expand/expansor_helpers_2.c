@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor_helpers_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:33:16 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 19:08:21 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 20:13:08 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_exec_args(char **args, char **env)
 
 	if (!args || !args[0] || !args[0][0])
 		exit(0);
-
 	path = ft_getpath(args[0], env);
 	if (!path)
 	{
@@ -39,6 +38,7 @@ void	expand_args_skip(char **args, char **env, int last)
 {
 	int		i;
 	char	*tmp;
+
 	i = 0;
 	while (args && args[i])
 	{

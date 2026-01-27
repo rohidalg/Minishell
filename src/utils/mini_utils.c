@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 19:54:56 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:09:36 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	update_quote(char c, char *q)
-{
-	if (*q == 0 && (c == '\'' || c == '"'))
-		*q = c;
-	else if (*q == c)
-		*q = 0;
-}
 
 static void	update_quote(char c, char *q)
 {
