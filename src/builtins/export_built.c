@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 03:53:40 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 18:14:19 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:52:31 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static char	**export_one(char *arg, t_vars **vars, char **g_env)
 {

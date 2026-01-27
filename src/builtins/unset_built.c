@@ -6,11 +6,11 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 19:34:58 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 17:35:37 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:53:45 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_valid_var_name(char *name)
 {

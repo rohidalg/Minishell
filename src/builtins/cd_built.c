@@ -6,11 +6,11 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 15:00:10 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 18:32:33 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:52:18 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	cd_is_dash(char **args)
 {
@@ -64,6 +64,7 @@ static void	cd_cleanup(char *oldpwd, char *target, char *newpwd, int status)
 	free(newpwd);
 	g_exit_status = status;
 }
+
 
 char	**builtin_cd(char **args, t_vars **vars, char **g_env)
 {

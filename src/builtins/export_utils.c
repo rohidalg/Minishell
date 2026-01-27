@@ -6,11 +6,11 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:13:36 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 17:50:21 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:52:40 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	vars_counter(t_vars *vars)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/27 17:37:44 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:54:47 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int		g_exit_status = 0;
 
@@ -94,19 +94,4 @@ void	run_pipex(char *input, char **g_env)
 	}
 	else
 		waitpid(pid, &status, 0);
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	char	**g_env;
-	t_vars	*vars;
-
-	(void)argc;
-	(void)argv;
-	g_env = NULL;
-	g_env = get_entire_env(env);
-	vars = init_vars_from_env(g_env);
-	header(&g_env, &vars);
-	minishell_cleanup(&g_env, &vars);
-	return (g_exit_status);
 }

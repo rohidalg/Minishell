@@ -6,11 +6,11 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 08:18:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 17:47:51 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:54:02 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 int	env_replace(char *arg, char **g_env)
 {

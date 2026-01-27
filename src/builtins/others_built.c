@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   others_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2026/01/21 00:55:00 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:52:59 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	builtin_pwd(void)
 {

@@ -6,11 +6,11 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 12:39:56 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/19 16:44:21 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:06:49 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 char	*vars_get_value(t_vars *vars, char *name)
 {

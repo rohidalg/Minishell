@@ -6,11 +6,11 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 14:50:42 by will23            #+#    #+#             */
-/*   Updated: 2026/01/19 17:36:25 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 19:54:11 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 char	*get_var_name(char *str)
 {
