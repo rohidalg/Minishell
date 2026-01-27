@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 18:25:49 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:31:45 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ typedef struct s_vars
 
 typedef struct s_exp
 {
-	char	**env;
-	int		last;
-	char	q;
-}	t_exp;
-
+	char			**env;
+	int				last;
+	char			q;
+}					t_exp;
 
 typedef struct s_pipe_data
 {
@@ -143,7 +142,8 @@ void				run_exec_args(char **args, char **g_env);
 int					exec_error(char *cmd);
 char				*append_char(char *s, char c);
 char				*expansor_exit(char *out, int *i, int last);
-char				*expansor_var(char *out, const char *s, int *i, char **g_env);
+char				*expansor_var(char *out, const char *s, int *i,
+						char **g_env);
 
 //------------------------PIPE_ENTRY------------------------------//
 

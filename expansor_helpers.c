@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 20:26:05 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 17:49:59 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:31:31 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int	var_name_len(const char *s)
 		i++;
 	return (i);
 }
-

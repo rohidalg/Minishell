@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_exit_var.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:46:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 17:51:18 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:32:43 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,3 @@ char	*expansor_var(char *out, const char *s, int *i, char **g_env)
 	*i += 1 + len;
 	return (out);
 }
-

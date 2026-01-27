@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:11:55 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 18:21:54 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 18:33:54 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ char	*expand_string(const char *s, char **env, int last)
 		if ((s[i] == '\'' || s[i] == '"') && e.q == 0)
 			e.q = s[i++];
 		else if (e.q && s[i] == e.q)
-			e.q = 0, i++;
+		{
+			e.q = 0;
+			i++;
+		}
 		else
 			out = append_char(out, s[i++]);
 	}
 	return (out);
 }
-
 
 void	expand_args(char **args, char **env, int last)
 {
