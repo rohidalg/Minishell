@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/27 16:38:28 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:37:44 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
 		ft_free(args);
 		return ;
 	}
-	expand_args_skip_heredoc(args, *g_env, g_exit_status);
+	expand_args_skip(args, *g_env, g_exit_status);
 	is_builtin = check_built_in(args, g_env, vars);
 	if (!is_builtin)
 		run_exec_args(args, *g_env);

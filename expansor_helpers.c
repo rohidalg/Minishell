@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 20:26:05 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 16:44:38 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:13:50 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,4 @@ int	var_name_len(const char *s)
 	return (i);
 }
 
-const char	*get_env_value(const char *var, char **g_env)
-{
-	int	i;
-	int	n;
 
-	n = (int)ft_strlen(var);
-	i = 0;
-	if (!var || g_env)
-		return ("");
-	while (g_env[i])
-	{
-		if (!ft_strncmp(g_env[i], var, n) && g_env[i][n] == '=')
-			return (g_env[i] + n + 1);
-		i++;
-	}
-	return ("");
-}

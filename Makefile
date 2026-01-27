@@ -30,7 +30,9 @@ SRCs =	parse.c	\
 		signals.c \
 		minishell_cleanup.c \
 		ft_split_quotes.c \
+		expansor.c \
 		expansor_helpers.c \
+		expansor_helpers_2.c \
 		exp_exit_var.c \
 		parser_helpers.c \
 		pipe_entry.c \

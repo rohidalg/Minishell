@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_exit_var.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:46:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 16:45:45 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:43:23 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	*expansor_exit(char *out, int *i, int last)
 	return (out);
 }
 
-char	*expansor_var(char *out, char *s, int *i, char **g_env)
+char	*expansor_var(char *out, const char *s, int *i, char **g_env)
 {
 	int		len;
 	char	*name;
 
 	len = var_name_len(s + (*i + 1));
 	name = ft_substr(s, *i + 1, len);
-	out = join_char(out, get_env_value(name, g_env));
+	out = join_char(out, ft_getpath(name, g_env));
 	*i += 1 + len;
 	return (out);
 }

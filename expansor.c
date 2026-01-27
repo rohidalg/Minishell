@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:11:55 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 16:44:53 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:42:02 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int	try_expand(char **out, const char *s, int *i, char **env, int last,
 	if (s[*i] != '$' || q == '\'')
 		return (0);
 	if (s[*i + 1] == '?')
-		return (*out = exp_exit(*out, i, last), 1);
+		return (*out = expansor_exit(*out, i, last), 1);
 	if (is_var_start(s[*i + 1]))
-		return (*out = exp_var(*out, s, i, env), 1);
+		return (*out = expansor_var(*out, s, i, env), 1);
 	return (0);
 }
 

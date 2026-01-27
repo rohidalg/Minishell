@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 16:43:32 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:43:00 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int					env_replace(char *arg, char **g_env);
 char				**env_set(char *arg, char **g_env);
 int					vars_counter(t_vars *vars);
 char				**vars_copy(t_vars *vars);
+char				*ft_getpath(char *cmd, char **env);
 
 //------------------------SIGNALS-----------------------------//
 
@@ -130,10 +131,12 @@ int					is_var_char(char c);
 int					var_name_len(const char *s);
 char				*expand_string(const char *s, char **env, int last);
 void				expand_args(char **args, char **env, int last);
-void				expand_args_skip_heredoc(char **args, char **env, int last);
+void				expand_args_skip(char **args, char **env, int last);
 void				run_exec_args(char **args, char **g_env);
 int					exec_error(char *cmd);
 char				*append_char(char *s, char c);
+char				*expansor_exit(char *out, int *i, int last);
+char				*expansor_var(char *out, const char *s, int *i, char **g_env);
 
 //------------------------PIPE_ENTRY------------------------------//
 
