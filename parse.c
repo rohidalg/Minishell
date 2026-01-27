@@ -6,13 +6,13 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/26 20:06:44 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:38:28 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			g_exit_status = 0;
+int		g_exit_status = 0;
 
 int	check_built_in(char **cmd, char ***g_env, t_vars **vars)
 {
@@ -43,7 +43,7 @@ void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
 	args = split_quote_aware(input);
 	if (!args || !args[0])
 	{
-		ft_free(args);	
+		ft_free(args);
 		return ;
 	}
 	expand_args_skip_heredoc(args, *g_env, g_exit_status);
@@ -89,11 +89,11 @@ void	run_pipex(char *input, char **g_env)
 	}
 	if (pid == 0)
 	{
-		ft_exec(input, g_env); // Proceso hijo: ejecuta el comando
+		ft_exec(input, g_env);
 		exit(127);
 	}
 	else
-		waitpid(pid, &status, 0); // Proceso padre: espera a que termine el hijo
+		waitpid(pid, &status, 0);
 }
 
 int	main(int argc, char **argv, char **env)

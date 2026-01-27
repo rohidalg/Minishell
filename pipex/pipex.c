@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:36:17 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 19:56:10 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:54:26 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_exit(char *str, int ex)
+{
+	ft_putstr_fd(str, 2);
+	exit(ex);
+}
 
 char	*ft_getenv(char *name, char **env)
 {
@@ -48,7 +54,7 @@ char	*ft_getpath(char *cmd, char **env)
 		if (access(cmd, F_OK) == 0)
 			res = ft_strdup(cmd);
 		if (access(cmd, X_OK) == 0)
-    		res = ft_strdup(cmd);
+			res = ft_strdup(cmd);
 		return (res);
 	}
 	path_env = ft_getenv("PATH", env);
@@ -61,7 +67,6 @@ char	*ft_getpath(char *cmd, char **env)
 	ft_free(path);
 	return (res);
 }
-
 
 void	ft_son(char **argv, char **env, int *fd_p)
 {

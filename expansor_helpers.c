@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 20:26:05 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/26 19:07:05 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:44:38 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ const char	*get_env_value(const char *var, char **g_env)
 {
 	int	i;
 	int	n;
-	
+
 	n = (int)ft_strlen(var);
 	i = 0;
 	if (!var || g_env)

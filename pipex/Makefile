@@ -12,7 +12,8 @@ INCLUDES = -I ../libft
 SRCs = pipex.c	\
 		env_check.c	\
 		ft_utils.c \
-		redirects.c
+		redirects.c \
+		heredoc.c
 
 DIR_OBJs = OBJECTS
 

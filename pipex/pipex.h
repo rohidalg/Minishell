@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:24:05 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 11:47:06 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:54:37 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 # include "../libft/libft.h"
 # include <fcntl.h>
+# include <readline/readline.h>
+# include <stdlib.h>
 # include <string.h>
 # include <sys/wait.h>
-#include <readline/readline.h>
-#include <stdlib.h>
-
 
 //------------------------pipex.c------------------------//
 
+void	ft_exit(char *str, int ex);
 char	*ft_getenv(char *name, char **env);
 char	*ft_getpath(char *command, char **env);
 void	ft_son(char **argv, char **env, int *fd_p);
@@ -30,11 +30,15 @@ void	ft_father(char **argv, char **env, int *fd_p);
 
 //------------------------ft_utils.c------------------------//
 
-void	ft_exit(char *str, int ex);
 void	ft_check_argv(int argc, char **argv);
 char	*ft_check_path(char **path, char *cmd);
 int		ft_file(char *file, int option);
 void	ft_exec(char *command, char **env);
+
+//------------------------redirects.c------------------------//
+
+int		redirect_input(char *file);
+int		redirect_output(char *file, int append);
 
 //------------------------env_check.c------------------------//
 
@@ -45,8 +49,6 @@ char	*ft_quotes(const char *str, char **env);
 
 //------------------------redirects.c------------------------//
 
-int		redirect_input(char *file);
-int		redirect_output(char *file, int append);
 char	**redirect(char **args);
 
 #endif

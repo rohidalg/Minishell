@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:29:46 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 16:51:29 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:54:04 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_exit(char *str, int ex)
-{
-	ft_putstr_fd(str, 2);
-	exit(ex);
-}
 
 void	ft_check_argv(int argc, char **argv)
 {

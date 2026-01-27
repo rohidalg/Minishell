@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_exit_var.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:46:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/26 19:43:58 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:45:45 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*join_char(char *a, const char *b)
 
 char	*append_char(char *s, char c)
 {
-	char buf[2];
+	char	buf[2];
 
 	buf[0] = c;
 	buf[1] = '\0';
@@ -37,7 +37,7 @@ char	*append_char(char *s, char c)
 char	*expansor_exit(char *out, int *i, int last)
 {
 	char	*tmp;
-	
+
 	tmp = ft_itoa(last);
 	out = join_char(out, tmp);
 	free(tmp);

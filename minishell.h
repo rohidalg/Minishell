@@ -6,10 +6,9 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/26 20:06:27 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:43:32 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -38,22 +37,22 @@ typedef struct s_vars
 
 typedef struct s_pipe_data
 {
-	char	**cmds;
-	pid_t	*pids;
-	int		n;
-	int		i;
-	int		prev;
-	int		fd[2];
-}	t_pipe_data;
+	char			**cmds;
+	pid_t			*pids;
+	int				n;
+	int				i;
+	int				prev;
+	int				fd[2];
+}					t_pipe_data;
 
 typedef struct s_stage
 {
-	int		prev;
-	int		fd[2];
-	int		last;
-	char	*cmd;
-	char	**env;
-}	t_stage;
+	int				prev;
+	int				fd[2];
+	int				last;
+	char			*cmd;
+	char			**env;
+}					t_stage;
 
 //------------------------PARSING------------------------//
 
@@ -136,28 +135,29 @@ void				run_exec_args(char **args, char **g_env);
 int					exec_error(char *cmd);
 char				*append_char(char *s, char c);
 
-//------------------------PIPES------------------------------//
+//------------------------PIPE_ENTRY------------------------------//
 
-// int					has_pipe(char *s);
-// void				run_pipeline(char *input, char **env);
-// void				run_line(char *input, char **env);
-/* entry */
-void	run_line(char *input, char **env);
-void	run_pipeline(char *input, char **env);
+void				run_line(char *input, char **env);
+void				run_pipeline(char *input, char **env);
 
-/* syntax */
-int		has_pipe(char *s);
-int		pipe_syntax_str(char *s);
+//------------------------PIPE_SYNTAX------------------------------//
 
-/* trim/utils */
-int		array_len(char **a);
-void	trim_all(char **cmds);
+int					has_pipe(char *s);
+int					pipe_syntax_str(char *s);
 
-/* pipeline internals */
-int		pipeline_prepare(t_pipe_data *d, char *input);
-void	cleanup_pipeline(t_pipe_data *d, int started);
-void	wait_pids(pid_t *p, int n);
-void	child_stage(t_stage st);
+//------------------------PIPE_TRIM------------------------------//
 
+int					array_len(char **a);
+void				trim_all(char **cmds);
+
+//------------------------PIPE_RUNTIME------------------------------//
+
+void				wait_pids(pid_t *p, int n);
+void				child_stage(t_stage st);
+
+//------------------------PIPE------------------------------//
+
+void				cleanup_pipeline(t_pipe_data *d, int started);
+int					pipeline_prepare(t_pipe_data *d, char *input);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/25 20:31:41 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:35:41 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ char	*remove_quotes(const char *s)
 	}
 	return (res);
 }
-

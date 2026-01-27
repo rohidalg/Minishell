@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:11:55 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/26 19:24:19 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 16:44:53 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	is_quote_char(char c)
 	return (c == '\'' || c == '"');
 }
 
-static int	try_expand(char **out, const char *s, int *i, char **env, int last, char q)
+static int	try_expand(char **out, const char *s, int *i, char **env, int last,
+		char q)
 {
 	if (s[*i] != '$' || q == '\'')
 		return (0);
