@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:46:28 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 17:43:23 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:51:18 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,16 @@ char	*expansor_var(char *out, const char *s, int *i, char **g_env)
 {
 	int		len;
 	char	*name;
+	char	*val;
 
 	len = var_name_len(s + (*i + 1));
 	name = ft_substr(s, *i + 1, len);
-	out = join_char(out, ft_getpath(name, g_env));
+	if (!name)
+		return (out);
+	val = (char *)ft_getenv(name, g_env);
+	out = join_char(out, val);
+	free(name);
 	*i += 1 + len;
 	return (out);
 }
+

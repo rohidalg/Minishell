@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 20:26:05 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 17:13:50 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/27 17:49:59 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ int	var_name_len(const char *s)
 		i++;
 	return (i);
 }
-
 
