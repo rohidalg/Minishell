@@ -35,7 +35,6 @@ SRCs =	parse.c	\
 		expansor_helpers.c \
 		expansor_helpers_2.c \
 		exp_exit_var.c \
-		parser_helpers.c \
 		pipe_entry.c \
 		pipe_runtime.c \
 		pipe_syntax.c \
