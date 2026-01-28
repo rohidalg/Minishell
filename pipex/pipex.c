@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:36:17 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 16:54:26 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/28 12:51:10 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	ft_exit(char *str, int ex)
 
 char	*ft_getenv(char *name, char **env)
 {
-	int		i;
-	int		len;
-	char	*result;
+	int	i;
+	int	len;
 
 	if (!env || !name)
 		return (NULL);
@@ -31,10 +30,7 @@ char	*ft_getenv(char *name, char **env)
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], name, len) && env[i][len] == '=')
-		{
-			result = env[i] + len + 1;
-			return (result);
-		}
+			return (env[i] + len + 1);
 		i++;
 	}
 	return (NULL);
@@ -46,16 +42,13 @@ char	*ft_getpath(char *cmd, char **env)
 	char	*res;
 	char	*path_env;
 
-	res = NULL;
 	if (!cmd || !*cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/'))
 	{
-		if (access(cmd, F_OK) == 0)
-			res = ft_strdup(cmd);
-		if (access(cmd, X_OK) == 0)
-			res = ft_strdup(cmd);
-		return (res);
+		if (access(cmd, F_OK) != 0)
+			return (NULL);
+		return (ft_strdup(cmd));
 	}
 	path_env = ft_getenv("PATH", env);
 	if (!path_env)

@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 17:33:16 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 20:13:08 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/28 13:47:14 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	run_exec_args(char **args, char **g_env)
 	if (pid == 0)
 	{
 		if (!redirect(args))
+		{
+			ft_free(args);
 			exit(1);
+		}
 		ft_exec_args(args, g_env);
 		exit(127);
 	}

@@ -6,7 +6,7 @@
 /*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 20:11:24 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:45:23 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include "../pipex/pipex.h"
 # include <errno.h>
+# include <limits.h>
 # include <pthread.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -117,6 +118,7 @@ char				**env_set(char *arg, char **g_env);
 int					vars_counter(t_vars *vars);
 char				**vars_copy(t_vars *vars);
 char				*ft_getpath(char *cmd, char **env);
+int					builtin_exit(char **args);
 
 //------------------------SIGNALS-----------------------------//
 

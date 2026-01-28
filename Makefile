@@ -51,6 +51,7 @@ SRC_BUILTINS := \
 	src/builtins/export_helpers.c \
 	src/builtins/cd_built.c \
 	src/builtins/cd_utils.c \
+	src/builtins/exit_built.c \
 	src/builtins/echo_built.c
 
 SRC_EXPAND := \

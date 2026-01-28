@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   others_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 15:09:38 by will23            #+#    #+#             */
-/*   Updated: 2026/01/27 19:07:09 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/28 14:53:30 by rohidalg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,42 @@ void	built_env(char **g_env)
 {
 	int	i;
 
+	if (!g_env)
+	{
+		g_exit_status = 1;
+		return ;
+	}
 	i = 0;
 	while (g_env[i])
 	{
 		printf("%s\n", g_env[i]);
 		i++;
 	}
+	g_exit_status = 0;
 }
 
 void	pwd_exit_env(char **cmd, char ***g_env)
 {
-	if (!cmd || cmd[0] == NULL)
+	if (!cmd || !cmd[0])
 		return ;
-	if (ft_strcmp(cmd[0], "pwd") == 0)
+	if (!ft_strcmp(cmd[0], "pwd"))
 		builtin_pwd();
-	else if (ft_strcmp(cmd[0], "exit") == 0)
-		exit(EXIT_SUCCESS);
-	else if (ft_strcmp(cmd[0], "env") == 0)
+	else if (!ft_strcmp(cmd[0], "exit"))
+		builtin_exit(cmd);
+	else if (!ft_strcmp(cmd[0], "env"))
 		built_env(*g_env);
 }
 
 void	unset_export_cd_echo(char **cmd, char ***g_env, t_vars **vars)
 {
-	if (!cmd || cmd[0] == NULL)
+	if (!cmd || !cmd[0])
 		return ;
-	else if (ft_strcmp(cmd[0], "unset") == 0)
+	if (!ft_strcmp(cmd[0], "unset"))
 		*vars = builtin_unset(cmd, *vars, *g_env);
-	else if (ft_strcmp(cmd[0], "export") == 0)
+	else if (!ft_strcmp(cmd[0], "export"))
 		*g_env = builtin_export(cmd, vars, *g_env);
-	else if (strcmp(cmd[0], "cd") == 0)
+	else if (!ft_strcmp(cmd[0], "cd"))
 		*g_env = builtin_cd(cmd, vars, *g_env);
-	else if (strcmp(cmd[0], "echo") == 0)
+	else if (!ft_strcmp(cmd[0], "echo"))
 		builtin_echo(cmd);
 }
