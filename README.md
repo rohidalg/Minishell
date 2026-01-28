@@ -1,22 +1,78 @@
-Oh shit, here we go again...
+*This project was created as part of the 42 curriculum by rohidalg, wiljimen.*
 
-R==15/07/25 --> cree lo basico, terminal y guardar los "comandos"
+# Minishell
 
-W==18/07/25 --> Empecé con el bonus del pipex para concatenar varios comandos, la lógica está puesta,
-                faltaría únicamente completar las funciones, pero aún estoy viendo como pq no me acuerdo.
+## Description
 
-W==24/09/2025 --> Fui haciendo lo de los built in y escribí un par de cosas y código en la carpeta
+Minishell is a simplified implementation of a Unix shell, developed in C as part of the 42 School curriculum.
+The objective of this project is to understand how a shell works internally by recreating its core behavior from scratch.
 
-W & R== 07/10/2025 --> Encotramos que el PWD y el ECHO (que hizo Rodri con lo de las comillas por arreglar) 
-                        ya se ejecutan por estar en el PATH gracias al Pipex, pero hay que guardar el environment 
-                        en un char por si lo borran, subir el LVLSHELL y además hay que verificar si los builts-in
-                        existen (si no han borrado el env o el PATH), y ahí crearlos, eso puede ser fuera del PIPEX.
+The program is capable of parsing and executing commands, managing environment variables, handling pipes and redirections, and implementing several built-in commands. Special attention is given to process management, file descriptors, signals, and memory safety.
 
-W== 07/10/2025 part 2 --> Se creó el built de pwd, de cd y el de env, junto al de exit, falta comprobar como mejorar el 
-                        funcionamiento por que en mi caso uso envp y hace falta env.
+---
 
-W== 25/11/2025 --> El built-in de unset está casi listo, falta programar la actualización de ambos env, tanto g_env como env.
+## Features
 
-W== 20/12/2025 --> El bult-in de unset y de export está listo, también modifiqué las funciones para que solo se actualice el
-                    g_env, sin tocar el original, para eso tenemos el bash real, o eso entiendo, por lo que ya debería de funcionar
-                    sin problema, compila y de momento sirve.
+- Execution of commands using absolute or relative paths.
+- Environment variable expansion (`$VAR`, `$?`)
+- Built-in commands:
+  - `echo`.
+  - `cd`.
+  - `pwd`.
+  - `export`.
+  - `unset`.
+  - `env`.
+  - `exit`.
+- Pipes (`|`).
+- Redirections:
+  - Input (`<`).
+  - Output (`>`).
+  - Append (`>>`).
+  - Heredoc (`<<`).
+- Signal handling (`Ctrl-C`, `Ctrl-D`, `Ctrl-\`).
+- Proper error handling and exit status management.
+- Memory leak free (tested with Valgrind / AddressSanitizer).
+
+---
+
+## Instructions
+
+To initiate this project, after compiling with *make*, we are going to write "./minishell" in our terminal,
+and we can start using it.
+
+### Requirements
+
+- Linux or macOS.
+- `cc`.
+- `make`.
+- GNU Readline library.
+
+### Compilation
+
+Clone the repository and compile the project using:
+
+*make*
+
+*To remove object files* -> make clean
+*To remove object files and executable* -> make fclean
+*To recompile* -> make re
+
+### Resources
+
+Bash manual: https://www.gnu.org/software/bash/manual/
+
+Video from YouTube: https://www.youtube.com/watch?v=yTR00r8vBH8
+
+Linux man pages (man bash, man fork, man execve, man pipe, man dup2)
+
+### Use of AI
+
+Artificial Intelligence tools (such as ChatGPT and Gemini) were used as a learning and support resource, mainly for:
+
+- Understanding shell behavior and edge cases.
+
+- Clarifying system calls and Unix concepts.
+
+- Reviewing logic and detecting potential memory issues.
+
+
