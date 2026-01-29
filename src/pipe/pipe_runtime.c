@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 19:45:43 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 19:09:07 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:00:55 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	safe_dup2(int oldfd, int newfd)
 
 void	child_stage(t_stage st)
 {
+	char	**args;
+
 	if (st.prev != -1)
 		safe_dup2(st.prev, STDIN_FILENO);
 	if (!st.last)
@@ -34,6 +36,10 @@ void	child_stage(t_stage st)
 		close(st.fd[0]);
 		close(st.fd[1]);
 	}
+	args = split_quote_aware(st.cmd);
+	if (!args || !args[0])
+		exit(1);
+	prepare_mini_args(&args);
 	ft_exec(st.cmd, st.env);
 	exit(127);
 }

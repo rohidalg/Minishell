@@ -6,11 +6,17 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 18:47:01 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/27 19:09:36 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:01:50 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_split_parts(char *op, char *rest)
+{
+	free(op);
+	free(rest);
+}
 
 static void	update_quote(char c, char *q)
 {

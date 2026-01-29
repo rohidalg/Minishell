@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 20:31:39 by will              #+#    #+#             */
-/*   Updated: 2026/01/28 15:07:50 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:01:11 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	pipex_or_builtin(char *input, char ***g_env, t_vars **vars)
 		ft_free(args);
 		return ;
 	}
+	prepare_mini_args(&args);
 	expand_args_skip(args, *g_env, g_exit_status);
 	apply_quotes(args, *g_env);
 	run_parsed(args, g_env, vars);
@@ -75,7 +76,10 @@ int	header(char ***g_env, t_vars **vars)
 		if (*input && !invalid_input(input))
 		{
 			add_history(input);
-			pipex_or_builtin(input, g_env, vars);
+			if (has_pipe(input))
+				run_line(input, *g_env);
+			else
+				pipex_or_builtin(input, g_env, vars);
 		}
 		free(input);
 	}

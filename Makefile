@@ -31,7 +31,8 @@ CLEAR     := \033[0m
 SRC_PARSE := \
 	src/parse/main.c \
 	src/parse/parse.c \
-	src/parse/parser_helpers.c
+	src/parse/args_helper.c \
+	src/parse/args_helper_2.c \
 
 SRC_UTILS := \
 	src/utils/mini_utils.c \

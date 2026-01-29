@@ -6,7 +6,7 @@
 /*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 18:11:30 by wiljimen          #+#    #+#             */
-/*   Updated: 2026/01/27 19:09:28 by wiljimen         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:04:17 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static char	*next_word(const char *s, int *i)
 
 char	**split_quote_aware(const char *s)
 {
-	char	**out;
-	int		i;
+	char 	**out;
+	int 	i;
 	int		j;
-	int		n;
+	int 	n;
 
 	n = count_words(s);
 	out = ft_calloc(n + 1, sizeof(char *));

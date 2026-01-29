@@ -11,6 +11,7 @@ INCLUDES = -I ../libft
 
 SRCs = pipex.c	\
 		env_check.c	\
+		env_check_helper.c \
 		ft_utils.c \
 		redirects.c \
 		heredoc.c

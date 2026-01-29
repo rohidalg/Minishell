@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rohidalg <rohidalg@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wiljimen <wiljimen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 17:48:58 by rohidalg          #+#    #+#             */
-/*   Updated: 2026/01/28 14:45:23 by rohidalg         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:02:14 by wiljimen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,19 @@ typedef struct s_stage
 
 int					header(char ***g_env, t_vars **vars);
 void				run_pipex(char *input, char **g_env);
+int					is_redir_prefix(const char *s);
+char				*dup_redir_op(const char *s);
+int					count_args(char **a);
+void				shift_after_insert(char **new, char **old, int i, int n);
+void				free_split_parts(char *op, char *rest);
+int					insert_split_token(char ***args, int i, char *op,
+						char *rest);
+void				split_one_redir(char ***args, int i);
+void				normalize_redirs(char ***args);
+int					count_nonempty(char **a);
+void				compact_empty_args(char ***args);
+void				prepare_mini_args(char ***args);
+char				*expand_in_quotes(const char *str, char **env);
 
 //------------------------BUILTS-IN------------------------//
 
